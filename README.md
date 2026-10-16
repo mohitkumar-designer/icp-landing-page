@@ -6,8 +6,8 @@ High-converting, responsive landing page for DiGGrowth's ICP Analytics agent (*"
 
 ## 🌐 Live Demos
 
-- **Vercel Live Preview**: [https://temporary-quick-orion-udvoz6i.vercel.app](https://temporary-quick-orion-udvoz6i.vercel.app)
-  - *To claim and permanently bind this deployment to your Vercel account*: [Claim Deployment](https://vercel.com/claim-deployment?code=b496e60e-0e2d-4a01-b718-acdf15832f7a)
+- **Vercel Live Preview**: [https://temporary-rushing-valley-648t7t4.vercel.app](https://temporary-rushing-valley-648t7t4.vercel.app)
+  - *To claim and permanently bind this deployment to your Vercel account*: [Claim Deployment](https://vercel.com/claim-deployment?code=6c1954f8-2ea3-4d1d-8296-4800bccd2305)
 - **1-Click Permanent Vercel Deploy**: [Deploy with Vercel](https://vercel.com/new/clone?repository-url=https://github.com/mohitkumar-designer/icp-landing-page)
 - **GitHub Pages Live Link**: [https://mohitkumar-designer.github.io/icp-landing-page/](https://mohitkumar-designer.github.io/icp-landing-page/)
 
