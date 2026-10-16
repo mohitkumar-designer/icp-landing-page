@@ -210,55 +210,48 @@ button{font-family:inherit}
 .gauge .g-lbl{font:var(--weight-regular) var(--text-sm)/1.3 var(--font-sans);color:var(--ink-400);margin-top:var(--space-1)}
 @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
-/* ===== Unified CTA & Footer (Celestial Moon & Shooting Stars) ===== */
-.cta-footer{position:relative;background:#06050a;overflow:hidden;padding:90px 0 0;display:flex;flex-direction:column;align-items:center;border-top:1px solid rgba(255,255,255,.05)}
-.cta-bloom{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:1300px;height:520px;background:radial-gradient(ellipse 65% 55% at 50% 50%,rgba(145,73,255,.42) 0%,rgba(100,32,204,.16) 45%,transparent 75%);pointer-events:none}
-.cta-stars-tex{position:absolute;top:0;left:0;right:0;height:480px;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.22) 1px,transparent 1px);background-size:48px 48px;opacity:.25;-webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black 20%,transparent 75%);mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black 20%,transparent 75%)}
-
-.moon-dome-wrap{position:relative;width:100%;max-width:1140px;padding:0 var(--gutter-page);margin:0 auto;z-index:2}
-
-/* Comet Orbit Track & Shooting Stars */
-.comet-track{position:absolute;top:0;left:var(--gutter-page);right:var(--gutter-page);height:180px;pointer-events:none;z-index:4}
-.shooting-comet{position:absolute;display:flex;align-items:center;pointer-events:none;will-change:transform,left,top,opacity}
-.comet-1{animation:orbitCometAcross 13s cubic-bezier(.4,0,.6,1) infinite}
-.comet-2{animation:orbitCometAcross 13s cubic-bezier(.4,0,.6,1) infinite;animation-delay:-6.5s}
-
-@keyframes orbitCometAcross{
-  0%{left:4%;top:118px;transform:rotate(-44deg) scale(.85);opacity:0}
-  10%{opacity:.95}
-  26%{left:24%;top:36px;transform:rotate(-24deg) scale(1);opacity:1}
-  50%{left:50%;top:-6px;transform:rotate(0deg) scale(1.05);opacity:1}
-  74%{left:76%;top:36px;transform:rotate(24deg) scale(1);opacity:1}
-  90%{opacity:.95}
-  100%{left:96%;top:118px;transform:rotate(44deg) scale(.85);opacity:0}
+/* ===== CELESTIAL MOON CTA SECTION ===== */
+.cta-celestial{position:relative;background:#030008;overflow:hidden;min-height:560px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.moon-ambient-glow{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:1200px;max-width:100vw;height:500px;background:radial-gradient(ellipse 65% 50% at 50% 28%,rgba(147,51,234,.48) 0%,rgba(109,40,217,.24) 45%,rgba(76,29,149,.08) 70%,transparent 85%);pointer-events:none;filter:blur(36px);z-index:1}
+.moon-flank-glow-left{position:absolute;top:140px;left:calc(50% - 540px);width:420px;height:320px;background:radial-gradient(circle,rgba(168,85,247,.36) 0%,rgba(126,34,206,.15) 50%,transparent 75%);filter:blur(40px);pointer-events:none;z-index:1}
+.moon-flank-glow-right{position:absolute;top:140px;right:calc(50% - 540px);width:420px;height:320px;background:radial-gradient(circle,rgba(168,85,247,.36) 0%,rgba(126,34,206,.15) 50%,transparent 75%);filter:blur(40px);pointer-events:none;z-index:1}
+.moon-stars-tex{position:absolute;top:0;left:0;right:0;height:500px;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.32) 1px,transparent 1px);background-size:38px 38px;opacity:.26;-webkit-mask-image:radial-gradient(ellipse 75% 60% at 50% 32%,black 20%,transparent 75%);mask-image:radial-gradient(ellipse 75% 60% at 50% 32%,black 20%,transparent 75%);z-index:1}
+.moon-stage{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(1200px, 100%);height:500px;pointer-events:none;z-index:2;overflow:visible}
+.moon-svg{width:100%;height:100%;overflow:visible}
+.moon-bottom-border{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(147,51,234,.25) 12%,rgba(192,132,252,.95) 50%,rgba(147,51,234,.25) 88%,transparent 100%);box-shadow:0 -1px 12px rgba(168,85,247,.8),0 0 24px rgba(147,51,234,.5);z-index:25;pointer-events:none}
+.shooting-star{transform-origin:0 0;will-change:transform,opacity}
+.star-1{animation:orbitComet1 6.5s linear -1.625s infinite}
+.star-2{animation:orbitComet1 6.5s linear -4.875s infinite}
+@keyframes orbitComet1{
+  0%{transform:translate(120px, 340px) rotate(-62deg);opacity:0}
+  10%{transform:translate(168px, 275px) rotate(-54deg);opacity:0.85}
+  25%{transform:translate(239px, 204px) rotate(-45deg);opacity:1}
+  38%{transform:translate(390px, 110px) rotate(-26deg);opacity:1}
+  50%{transform:translate(600px, 54px) rotate(0deg);opacity:0.95}
+  62%{transform:translate(810px, 110px) rotate(26deg);opacity:1}
+  75%{transform:translate(961px, 204px) rotate(45deg);opacity:1}
+  90%{transform:translate(1032px, 275px) rotate(54deg);opacity:0.85}
+  100%{transform:translate(1080px, 340px) rotate(62deg);opacity:0}
 }
-
-.comet-tail{width:58px;height:3.5px;border-radius:var(--radius-pill);background:linear-gradient(90deg,transparent 0%,rgba(145,73,255,.25) 25%,rgba(192,132,252,.85) 75%,#fff 100%);filter:drop-shadow(0 0 8px rgba(168,85,247,.95)) drop-shadow(0 0 16px rgba(145,73,255,.7))}
-.comet-head{width:7.5px;height:7.5px;border-radius:50%;background:#fff;margin-left:-3px;box-shadow:0 0 8px #fff,0 0 16px #c084fc,0 0 30px #9149ff}
-
-/* Celestial Moon Dome */
-.moon-dome{position:relative;width:100%;border-top-left-radius:50% 180px;border-top-right-radius:50% 180px;background:radial-gradient(ellipse 85% 70% at 50% 0%,#120e22 0%,#08070d 50%,#050408 100%);border-top:2px solid rgba(168,85,247,.9);box-shadow:0 -4px 35px rgba(168,85,247,.75),0 -16px 80px rgba(145,73,255,.45),0 -35px 140px rgba(145,73,255,.25),inset 0 4px 35px rgba(168,85,247,.42),inset 0 16px 70px rgba(145,73,255,.2);padding:clamp(60px,8vw,92px) clamp(20px,4vw,48px) clamp(50px,6vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;z-index:3}
-.moon-eyebrow{color:#c084fc;font-family:var(--font-sans);font-size:var(--text-sm);font-weight:var(--weight-medium);letter-spacing:.05em;text-transform:none;margin-bottom:var(--space-4)}
-.moon-dome h2{color:#fff;font-size:clamp(26px,3.4vw,44px);font-family:var(--font-display);font-weight:var(--weight-semibold);line-height:1.22;letter-spacing:-0.02em;margin:0 auto var(--space-4);max-width:17em}
-.moon-dome p{color:#b3b2c2;font-size:clamp(14px,1.25vw,16px);line-height:var(--leading-relaxed);max-width:32em;margin:0 auto var(--space-8)}
-
-/* Book a Demo Button */
-.btn-moon{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);background:#fff;color:#0b0a14;font-family:var(--font-sans);font-weight:var(--weight-semibold);font-size:var(--text-base);height:48px;padding:0 var(--space-8);border-radius:var(--radius-pill);box-shadow:0 4px 20px rgba(0,0,0,.5),0 0 25px rgba(255,255,255,.25);transition:transform var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out),background-color var(--dur-fast) var(--ease-out);cursor:pointer;text-decoration:none}
+.moon-content-overlay{position:relative;z-index:10;text-align:center;max-width:820px;margin:0 auto;padding:105px 24px 85px;display:flex;flex-direction:column;align-items:center}
+.moon-eyebrow{color:#94a3af;font-family:var(--font-sans);font-size:15px;font-weight:500;letter-spacing:.02em;margin-bottom:var(--space-4);display:inline-flex;align-items:center;gap:5px}
+.moon-eyebrow .ai-agents-hl{color:#a855f7;font-weight:600;text-shadow:0 0 16px rgba(168,85,247,.55)}
+.moon-h2{color:#fff;font-family:var(--font-display);font-size:clamp(28px,3.8vw,46px);font-weight:var(--weight-semibold);line-height:1.22;letter-spacing:-0.025em;margin:0 auto var(--space-4);max-width:18.5em;text-shadow:0 2px 24px rgba(0,0,0,.7)}
+.moon-p{color:#cbd5e1;font-family:var(--font-sans);font-size:clamp(14px,1.25vw,16px);line-height:var(--leading-relaxed);max-width:32em;margin:0 auto var(--space-8);opacity:.92}
+.btn-moon{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:#0b0a14;font-family:var(--font-sans);font-weight:var(--weight-semibold);font-size:var(--text-base);height:48px;padding:0 28px;border-radius:var(--radius-pill);box-shadow:0 4px 20px rgba(0,0,0,.5),0 0 24px rgba(255,255,255,.28);transition:transform var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out),background-color var(--dur-fast) var(--ease-out);cursor:pointer;text-decoration:none}
 .btn-moon:hover{transform:translateY(-2px) scale(1.02);background:#fff;color:#000;box-shadow:0 6px 28px rgba(0,0,0,.6),0 0 35px rgba(192,132,252,.65);text-decoration:none}
 .btn-moon:active{transform:scale(.98)}
-.btn-moon .arrow{font-size:18px;line-height:1;transition:transform var(--dur-fast) var(--ease-out)}
-.btn-moon:hover .arrow{transform:translateX(3px)}
+.btn-moon .chevron{transition:transform var(--dur-fast) var(--ease-out)}
+.btn-moon:hover .chevron{transform:translateX(3px)}
 
-/* Purple horizon line across bottom */
-.moon-horizon{position:relative;width:100%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(145,73,255,.4) 15%,#9149ff 50%,rgba(145,73,255,.4) 85%,transparent 100%);box-shadow:0 0 14px rgba(145,73,255,.6),0 0 28px rgba(145,73,255,.35);z-index:5}
-
-/* Footer Content inside cta-footer */
-.cta-footer .foot-inner{width:100%;max-width:var(--container-max);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-8) var(--gutter-page);flex-wrap:wrap;z-index:5}
-.cta-footer .brandmark{margin-bottom:0}
-.cta-footer .links{display:flex;align-items:center;gap:var(--space-6);font-size:var(--text-base);font-weight:var(--weight-medium)}
-.cta-footer .links a{color:var(--ink-400)}
-.cta-footer .links a:hover{color:var(--ink-200);text-decoration:none}
-.cta-footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
+/* ===== footer ===== */
+footer{background:#05030a;border-top:none}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-10) 0;flex-wrap:wrap}
+.foot-inner .brandmark{margin-bottom:0}
+footer .links{display:flex;align-items:center;gap:var(--space-6);font-size:var(--text-base);font-weight:var(--weight-medium)}
+footer .links a{color:var(--ink-400)}
+footer .links a:hover{color:var(--ink-200);text-decoration:none}
+footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
 
 /* reveal-on-scroll */
 .rv{opacity:0;transform:translateY(18px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
@@ -435,81 +428,174 @@ button{font-family:inherit}
   </div>
 </section>
 
-  <!-- ===== UNIFIED CLOSING SECTION: MOON DOME CTA + FOOTER ===== -->
-  <footer class="cta-footer" id="ctaSection">
-    <div class="cta-bloom" aria-hidden="true"></div>
-    <div class="cta-stars-tex" aria-hidden="true"></div>
+<!-- ===== CELESTIAL MOON CTA ===== -->
+<section class="cta cta-celestial" id="cta">
+  <div class="moon-ambient-glow" aria-hidden="true"></div>
+  <div class="moon-flank-glow-left" aria-hidden="true"></div>
+  <div class="moon-flank-glow-right" aria-hidden="true"></div>
+  <div class="moon-stars-tex" aria-hidden="true"></div>
 
-    <div class="moon-stage">
-      <!-- Orbit tracks with two shooting stars moving around the moon dome -->
-      <div class="comet-track" aria-hidden="true">
-        <div class="shooting-comet comet-1">
-          <div class="comet-tail"></div>
-          <div class="comet-head"></div>
-        </div>
-        <div class="shooting-comet comet-2">
-          <div class="comet-tail"></div>
-          <div class="comet-head"></div>
-        </div>
-      </div>
+  <!-- SVG Visual Stage: Centered Moon Dome & Radiant Atmosphere -->
+  <div class="moon-stage" aria-hidden="true">
+    <svg viewBox="0 0 1200 500" class="moon-svg">
+      <defs>
+        <!-- Atmospheric Wide Aura Gradient -->
+        <linearGradient id="moonAuraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#581c87" stop-opacity="0.2"/>
+          <stop offset="18%" stop-color="#7e22ce" stop-opacity="0.75"/>
+          <stop offset="50%" stop-color="#a855f7" stop-opacity="0.95"/>
+          <stop offset="82%" stop-color="#7e22ce" stop-opacity="0.75"/>
+          <stop offset="100%" stop-color="#581c87" stop-opacity="0.2"/>
+        </linearGradient>
 
-      <!-- Celestial Moon Dome -->
-      <div class="moon-dome">
-        <span class="eyebrow moon-eyebrow">Powered by AI Agents</span>
-        <h2>Stop Spending Your Next Quarter’s Budget on Last Year’s ICP.</h2>
-        <p>Use what you’ve won and what you’ve lost to decide who gets the next dollar. </p>
-        <a href="#formCard" class="btn-moon" id="ctaBtn">Get a Free ICP Analysis<span class="arrow"
-            aria-hidden="true">›</span></a>
-      </div>
+        <!-- Vibrant Violet Moon Rim Band (matches the prominent band in screenshot) -->
+        <linearGradient id="moonVibrantRimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4c1d95" stop-opacity="0.5"/>
+          <stop offset="16%" stop-color="#7c3aed" stop-opacity="0.95"/>
+          <stop offset="50%" stop-color="#a855f7" stop-opacity="1"/>
+          <stop offset="84%" stop-color="#7c3aed" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#4c1d95" stop-opacity="0.5"/>
+        </linearGradient>
+
+        <!-- Neon Edge Gradient -->
+        <linearGradient id="moonNeonEdgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#6d28d9" stop-opacity="0.4"/>
+          <stop offset="22%" stop-color="#c084fc" stop-opacity="0.95"/>
+          <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+          <stop offset="78%" stop-color="#c084fc" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.4"/>
+        </linearGradient>
+
+        <!-- Hairline Highlight Gradient -->
+        <linearGradient id="moonHairlineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#9333ea" stop-opacity="0"/>
+          <stop offset="25%" stop-color="#c084fc" stop-opacity="0.85"/>
+          <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+          <stop offset="75%" stop-color="#c084fc" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#9333ea" stop-opacity="0"/>
+        </linearGradient>
+
+        <!-- Inner Shadow for Dark Dome Core -->
+        <radialGradient id="moonInnerShadow" cx="50%" cy="14%" r="80%">
+          <stop offset="0%" stop-color="#15072e" stop-opacity="0.85"/>
+          <stop offset="30%" stop-color="#080214" stop-opacity="0.95"/>
+          <stop offset="65%" stop-color="#000000" stop-opacity="1"/>
+        </radialGradient>
+
+        <!-- Comet Tail Laser Gradient -->
+        <linearGradient id="cometTailGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#6b21a8" stop-opacity="0"/>
+          <stop offset="35%" stop-color="#9333ea" stop-opacity="0.45"/>
+          <stop offset="72%" stop-color="#c084fc" stop-opacity="0.9"/>
+          <stop offset="92%" stop-color="#f3e8ff" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
+        </linearGradient>
+
+        <!-- Bottom Border Baseline Gradient -->
+        <linearGradient id="bottomBorderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#7e22ce" stop-opacity="0"/>
+          <stop offset="15%" stop-color="#9333ea" stop-opacity="0.35"/>
+          <stop offset="50%" stop-color="#c084fc" stop-opacity="0.95"/>
+          <stop offset="85%" stop-color="#9333ea" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#7e22ce" stop-opacity="0"/>
+        </linearGradient>
+
+        <!-- Atmospheric Glow Filters -->
+        <filter id="wideAuraBlur" x="-30%" y="-50%" width="160%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="18"/>
+        </filter>
+        <filter id="rimGlowFilter" x="-20%" y="-40%" width="140%" height="180%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="hairlineGlow" x="-20%" y="-40%" width="140%" height="180%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="glow"/>
+          <feMerge>
+            <feMergeNode in="glow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- 1. Moon Dark Core Body (pitch black interior) -->
+      <path d="M 110,495 A 495,495 0 0,1 1090,495 L 1150,495 L 1150,510 L 50,510 L 50,495 Z" fill="#000000"/>
+      <path d="M 110,495 A 495,495 0 0,1 1090,495 L 1150,495 L 1150,510 L 50,510 L 50,495 Z" fill="url(#moonInnerShadow)"/>
+
+      <!-- 2. Wide Atmospheric Violet Aura (outer haze) -->
+      <path d="M 110,495 A 495,495 0 0,1 1090,495" fill="none" stroke="url(#moonAuraGrad)" stroke-width="60" filter="url(#wideAuraBlur)" opacity="0.75"/>
+
+      <!-- 3. Vibrant Purple Planetary Rim Band (matching screenshot band) -->
+      <path d="M 110,495 A 495,495 0 0,1 1090,495" fill="none" stroke="url(#moonVibrantRimGrad)" stroke-width="26" filter="url(#rimGlowFilter)"/>
+
+      <!-- 4. Luminous Neon Rim Edge -->
+      <path d="M 110,495 A 495,495 0 0,1 1090,495" fill="none" stroke="url(#moonNeonEdgeGrad)" stroke-width="5" opacity="0.95"/>
+
+      <!-- 5. Crisp White/Lavender Hairline Highlight -->
+      <path d="M 110,495 A 495,495 0 0,1 1090,495" fill="none" stroke="url(#moonHairlineGrad)" stroke-width="1.8" filter="url(#hairlineGlow)"/>
+
+      <!-- 6. Left Shooting Star (starts at 25% = left shoulder, angled at -45°) -->
+      <g class="shooting-star star-1">
+        <path d="M -75,0 C -50,-1.2 -22,-2.8 0,-2.8 C 4,-2.8 6,-1.2 6,0 C 6,1.2 4,2.8 0,2.8 C -22,2.8 -50,1.2 -75,0 Z" fill="url(#cometTailGrad)"/>
+        <circle cx="0" cy="0" r="16" fill="#a855f7" opacity="0.4"/>
+        <circle cx="0" cy="0" r="8" fill="#c084fc" opacity="0.85"/>
+        <circle cx="0" cy="0" r="4" fill="#f3e8ff"/>
+        <circle cx="0" cy="0" r="2.2" fill="#ffffff"/>
+      </g>
+
+      <!-- 7. Right Shooting Star (starts at 75% = right shoulder, angled at +45°) -->
+      <g class="shooting-star star-2">
+        <path d="M -75,0 C -50,-1.2 -22,-2.8 0,-2.8 C 4,-2.8 6,-1.2 6,0 C 6,1.2 4,2.8 0,2.8 C -22,2.8 -50,1.2 -75,0 Z" fill="url(#cometTailGrad)"/>
+        <circle cx="0" cy="0" r="16" fill="#a855f7" opacity="0.4"/>
+        <circle cx="0" cy="0" r="8" fill="#c084fc" opacity="0.85"/>
+        <circle cx="0" cy="0" r="4" fill="#f3e8ff"/>
+        <circle cx="0" cy="0" r="2.2" fill="#ffffff"/>
+      </g>
+
+      <!-- 8. SVG Baseline Border -->
+      <line x1="0" y1="495" x2="1200" y2="495" stroke="url(#bottomBorderGrad)" stroke-width="2.5" filter="url(#hairlineGlow)"/>
+    </svg>
+  </div>
+
+  <!-- Full-width Bottom Purple Border fading from left and right -->
+  <div class="moon-bottom-border" aria-hidden="true"></div>
+
+  <!-- Content positioned right inside the upper moon dome -->
+  <div class="moon-content-overlay">
+    <span class="moon-eyebrow">Powered <span class="ai-agents-hl">by AI Agents</span></span>
+    <h2 class="moon-h2">Stop Spending Your Next Quarter's Budget on Last Year's ICP.</h2>
+    <p class="moon-p">Use what you've won and what you've lost to decide who gets the next dollar.</p>
+    <a href="#formCard" class="btn-moon" id="ctaBtn">
+      <span>Book a Demo</span>
+      <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot-inner">
+    <div class="brandmark" aria-label="DiGGrowth">
+      <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DiGGrowth">
+        <path d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z" fill="white"/>
+        <path d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z" fill="white"/>
+        <path d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z" fill="white"/>
+        <path d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z" fill="#9149FF"/>
+        <path d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z" fill="#9149FF"/>
+        <path d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z" fill="#9149FF"/>
+        <path d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z" fill="#9149FF"/>
+        <path d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z" fill="#9149FF"/>
+        <path d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z" fill="#9149FF"/>
+        <path d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707" fill="#9149FF"/>
+        <path d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z" fill="white"/>
+      </svg>
     </div>
-
-    <!-- Glowing Purple Horizon Line -->
-    <div class="moon-horizon" aria-hidden="true"></div>
-
-    <!-- Integrated Footer Row -->
-    <div class="wrap foot-inner">
-      <div class="brandmark" aria-label="DiGGrowth">
-        <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-          aria-label="DiGGrowth">
-          <path
-            d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z"
-            fill="white" />
-          <path
-            d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z"
-            fill="white" />
-          <path
-            d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z"
-            fill="white" />
-          <path
-            d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z"
-            fill="#9149FF" />
-          <path
-            d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z"
-            fill="#9149FF" />
-          <path
-            d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z"
-            fill="#9149FF" />
-          <path
-            d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z"
-            fill="#9149FF" />
-          <path
-            d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z"
-            fill="#9149FF" />
-          <path
-            d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z"
-            fill="#9149FF" />
-          <path
-            d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707"
-            fill="#9149FF" />
-          <path
-            d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z"
-            fill="white" />
-        </svg>
-      </div>
-      <div class="links"><a href="https://diggrowth.com/privacy-policy/">Privacy Policy</a></div>
-      <p class="cr">Copyright © 2026. All Rights Reserved</p>
-    </div>
-  </footer>
+    <div class="links"><a href="https://diggrowth.com/privacy-policy/">Privacy Policy</a></div>
+    <p class="cr">Copyright © 2026. All Rights Reserved</p>
+  </div>
+</footer>
 
 <script>
 (function(){
