@@ -164,12 +164,30 @@ button{font-family:inherit}
 .brow{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:var(--space-3);margin-top:var(--space-2)}
 .brow .bseg{font:var(--weight-regular) var(--text-sm)/1.2 var(--font-sans);color:var(--ink-400)}
 .btrack{height:10px;border-radius:var(--radius-pill);background:var(--ink-800);overflow:hidden;box-shadow:var(--inset-well)}
-.bfill{display:block;height:100%;width:var(--w);border-radius:var(--radius-pill);transform-origin:left;animation:fill var(--dur-slow) var(--ease-out) both}
+.bfill{display:block;height:100%;width:var(--w);border-radius:var(--radius-pill);transform-origin:left;transform:scaleX(0)}
 .bfill.win{background:var(--grad-brand);box-shadow:var(--shadow-brand-sm)}
 .bfill.other{background:var(--ink-500)}
-.brow .bval{font-family:var(--font-mono);font-size:var(--text-base);font-variant-numeric:tabular-nums;text-align:right;min-width:52px}
+.brow .bval{font-family:var(--font-mono);font-size:var(--text-base);font-variant-numeric:tabular-nums;text-align:right;min-width:52px;opacity:0;transform:translateX(-6px);transition:opacity 0.4s var(--ease-out),transform 0.4s var(--ease-out)}
 .bval.win{color:var(--purple-300);font-weight:var(--weight-medium)}
 .bval.other{color:var(--ink-400)}
+
+/* Animate bars when snapshot comes on screen */
+.snapshot.in .bfill{animation:fill 850ms cubic-bezier(.16,1,.3,1) both}
+.snapshot.in .bgroup:nth-child(1) .brow:nth-child(2) .bfill{animation-delay:100ms}
+.snapshot.in .bgroup:nth-child(1) .brow:nth-child(3) .bfill{animation-delay:180ms}
+.snapshot.in .bgroup:nth-child(2) .brow:nth-child(2) .bfill{animation-delay:260ms}
+.snapshot.in .bgroup:nth-child(2) .brow:nth-child(3) .bfill{animation-delay:340ms}
+.snapshot.in .bgroup:nth-child(3) .brow:nth-child(2) .bfill{animation-delay:420ms}
+.snapshot.in .bgroup:nth-child(3) .brow:nth-child(3) .bfill{animation-delay:500ms}
+
+.snapshot.in .brow .bval{opacity:1;transform:none}
+.snapshot.in .bgroup:nth-child(1) .brow:nth-child(2) .bval{transition-delay:200ms}
+.snapshot.in .bgroup:nth-child(1) .brow:nth-child(3) .bval{transition-delay:280ms}
+.snapshot.in .bgroup:nth-child(2) .brow:nth-child(2) .bval{transition-delay:360ms}
+.snapshot.in .bgroup:nth-child(2) .brow:nth-child(3) .bval{transition-delay:440ms}
+.snapshot.in .bgroup:nth-child(3) .brow:nth-child(2) .bval{transition-delay:520ms}
+.snapshot.in .bgroup:nth-child(3) .brow:nth-child(3) .bval{transition-delay:600ms}
+
 .legend{display:flex;gap:var(--space-5);margin-top:var(--space-6);padding-top:var(--space-5);border-top:1px solid var(--border-subtle)}
 .legend .lg{display:inline-flex;align-items:center;gap:var(--space-2);font:var(--weight-medium) var(--text-sm)/1 var(--font-sans);color:var(--ink-400)}
 .legend .sw{width:12px;height:12px;border-radius:var(--radius-xs);flex:none}
@@ -184,33 +202,63 @@ button{font-family:inherit}
 .gauge{text-align:center}
 .donut{width:116px;height:116px;display:block;margin:0 auto var(--space-3)}
 .donut .g-track{stroke:var(--ink-800)}
-.donut .g-fill{stroke:url(#gaugeGrad);animation:donut var(--dur-slow) var(--ease-out) both}
-@keyframes donut{from{stroke-dasharray:0 100}}
+.donut .g-fill{stroke:url(#gaugeGrad);stroke-dasharray:0 100}
+.snapshot.in .donut .g-fill{animation:donut 1100ms cubic-bezier(.16,1,.3,1) 200ms both}
+@keyframes donut{from{stroke-dasharray:0 100}to{stroke-dasharray:34 100}}
 .donut .g-pct{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:26px;fill:#fff;letter-spacing:var(--tracking-tight)}
 .gauge .g-count{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-xl);color:#fff;letter-spacing:var(--tracking-tight)}
 .gauge .g-lbl{font:var(--weight-regular) var(--text-sm)/1.3 var(--font-sans);color:var(--ink-400);margin-top:var(--space-1)}
 @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
-/* ===== CTA band ===== */
-.cta{position:relative;background:var(--grad-brand);overflow:hidden}
-.cta::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 15% 0%,rgba(255,255,255,.14),transparent 55%);pointer-events:none}
-.cta-inner{position:relative;text-align:center;padding:var(--section-y) var(--gutter-page)}
-.cta .eyebrow{color:rgba(255,255,255,.85)}
-.cta h2{color:#fff;font-size:var(--text-5xl);letter-spacing:var(--tracking-tight);margin:var(--space-3) auto var(--space-4);max-width:18em}
-@media(max-width:560px){.cta h2{font-size:var(--text-3xl)}}
-.cta p{color:rgba(255,255,255,.9);font-size:var(--text-lg);max-width:34em;margin:0 auto var(--space-8)}
-.cta .btn-light{background:#fff;color:var(--purple-700);box-shadow:0 10px 30px rgba(8,7,13,.3)}
-.cta .btn-light:hover{background:#fff;transform:translateY(-1px);box-shadow:0 14px 36px rgba(8,7,13,.4);color:var(--purple-700)}
-.cta .btn-light:active{transform:scale(.98)}
+/* ===== Unified CTA & Footer (Celestial Moon & Shooting Stars) ===== */
+.cta-footer{position:relative;background:#06050a;overflow:hidden;padding:90px 0 0;display:flex;flex-direction:column;align-items:center;border-top:1px solid rgba(255,255,255,.05)}
+.cta-bloom{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:1300px;height:520px;background:radial-gradient(ellipse 65% 55% at 50% 50%,rgba(145,73,255,.42) 0%,rgba(100,32,204,.16) 45%,transparent 75%);pointer-events:none}
+.cta-stars-tex{position:absolute;top:0;left:0;right:0;height:480px;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.22) 1px,transparent 1px);background-size:48px 48px;opacity:.25;-webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black 20%,transparent 75%);mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black 20%,transparent 75%)}
 
-/* ===== footer ===== */
-footer{background:var(--ink-950);border-top:1px solid var(--border-subtle)}
-.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-10) 0;flex-wrap:wrap}
-.foot-inner .brandmark{margin-bottom:0}
-footer .links{display:flex;align-items:center;gap:var(--space-6);font-size:var(--text-base);font-weight:var(--weight-medium)}
-footer .links a{color:var(--ink-400)}
-footer .links a:hover{color:var(--ink-200);text-decoration:none}
-footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
+.moon-dome-wrap{position:relative;width:100%;max-width:1140px;padding:0 var(--gutter-page);margin:0 auto;z-index:2}
+
+/* Comet Orbit Track & Shooting Stars */
+.comet-track{position:absolute;top:0;left:var(--gutter-page);right:var(--gutter-page);height:180px;pointer-events:none;z-index:4}
+.shooting-comet{position:absolute;display:flex;align-items:center;pointer-events:none;will-change:transform,left,top,opacity}
+.comet-1{animation:orbitCometAcross 13s cubic-bezier(.4,0,.6,1) infinite}
+.comet-2{animation:orbitCometAcross 13s cubic-bezier(.4,0,.6,1) infinite;animation-delay:-6.5s}
+
+@keyframes orbitCometAcross{
+  0%{left:4%;top:118px;transform:rotate(-44deg) scale(.85);opacity:0}
+  10%{opacity:.95}
+  26%{left:24%;top:36px;transform:rotate(-24deg) scale(1);opacity:1}
+  50%{left:50%;top:-6px;transform:rotate(0deg) scale(1.05);opacity:1}
+  74%{left:76%;top:36px;transform:rotate(24deg) scale(1);opacity:1}
+  90%{opacity:.95}
+  100%{left:96%;top:118px;transform:rotate(44deg) scale(.85);opacity:0}
+}
+
+.comet-tail{width:58px;height:3.5px;border-radius:var(--radius-pill);background:linear-gradient(90deg,transparent 0%,rgba(145,73,255,.25) 25%,rgba(192,132,252,.85) 75%,#fff 100%);filter:drop-shadow(0 0 8px rgba(168,85,247,.95)) drop-shadow(0 0 16px rgba(145,73,255,.7))}
+.comet-head{width:7.5px;height:7.5px;border-radius:50%;background:#fff;margin-left:-3px;box-shadow:0 0 8px #fff,0 0 16px #c084fc,0 0 30px #9149ff}
+
+/* Celestial Moon Dome */
+.moon-dome{position:relative;width:100%;border-top-left-radius:50% 180px;border-top-right-radius:50% 180px;background:radial-gradient(ellipse 85% 70% at 50% 0%,#120e22 0%,#08070d 50%,#050408 100%);border-top:2px solid rgba(168,85,247,.9);box-shadow:0 -4px 35px rgba(168,85,247,.75),0 -16px 80px rgba(145,73,255,.45),0 -35px 140px rgba(145,73,255,.25),inset 0 4px 35px rgba(168,85,247,.42),inset 0 16px 70px rgba(145,73,255,.2);padding:clamp(60px,8vw,92px) clamp(20px,4vw,48px) clamp(50px,6vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;z-index:3}
+.moon-eyebrow{color:#c084fc;font-family:var(--font-sans);font-size:var(--text-sm);font-weight:var(--weight-medium);letter-spacing:.05em;text-transform:none;margin-bottom:var(--space-4)}
+.moon-dome h2{color:#fff;font-size:clamp(26px,3.4vw,44px);font-family:var(--font-display);font-weight:var(--weight-semibold);line-height:1.22;letter-spacing:-0.02em;margin:0 auto var(--space-4);max-width:17em}
+.moon-dome p{color:#b3b2c2;font-size:clamp(14px,1.25vw,16px);line-height:var(--leading-relaxed);max-width:32em;margin:0 auto var(--space-8)}
+
+/* Book a Demo Button */
+.btn-moon{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);background:#fff;color:#0b0a14;font-family:var(--font-sans);font-weight:var(--weight-semibold);font-size:var(--text-base);height:48px;padding:0 var(--space-8);border-radius:var(--radius-pill);box-shadow:0 4px 20px rgba(0,0,0,.5),0 0 25px rgba(255,255,255,.25);transition:transform var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out),background-color var(--dur-fast) var(--ease-out);cursor:pointer;text-decoration:none}
+.btn-moon:hover{transform:translateY(-2px) scale(1.02);background:#fff;color:#000;box-shadow:0 6px 28px rgba(0,0,0,.6),0 0 35px rgba(192,132,252,.65);text-decoration:none}
+.btn-moon:active{transform:scale(.98)}
+.btn-moon .arrow{font-size:18px;line-height:1;transition:transform var(--dur-fast) var(--ease-out)}
+.btn-moon:hover .arrow{transform:translateX(3px)}
+
+/* Purple horizon line across bottom */
+.moon-horizon{position:relative;width:100%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(145,73,255,.4) 15%,#9149ff 50%,rgba(145,73,255,.4) 85%,transparent 100%);box-shadow:0 0 14px rgba(145,73,255,.6),0 0 28px rgba(145,73,255,.35);z-index:5}
+
+/* Footer Content inside cta-footer */
+.cta-footer .foot-inner{width:100%;max-width:var(--container-max);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-8) var(--gutter-page);flex-wrap:wrap;z-index:5}
+.cta-footer .brandmark{margin-bottom:0}
+.cta-footer .links{display:flex;align-items:center;gap:var(--space-6);font-size:var(--text-base);font-weight:var(--weight-medium)}
+.cta-footer .links a{color:var(--ink-400)}
+.cta-footer .links a:hover{color:var(--ink-200);text-decoration:none}
+.cta-footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
 
 /* reveal-on-scroll */
 .rv{opacity:0;transform:translateY(18px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
@@ -240,11 +288,6 @@ footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
           <path d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z" fill="white"/>
         </svg>
       </div>
-
-      <span class="agent-tag">
-        <span class="dot" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M11 7v4l3 2"/></svg></span>
-        <span>ICP Analytics</span>
-      </span>
 
       <h1>Your Target List Matches Your ICP. Does Your ICP Match <span class="hl">Who Actually Buys?</span></h1>
       <p class="sub">AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and show which accounts deserve your attention.</p>
@@ -369,8 +412,8 @@ footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
                 <defs><linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9149FF"/><stop offset="1" stop-color="#6420CC"/></linearGradient></defs>
                 <circle class="g-track" cx="60" cy="60" r="52" fill="none" stroke-width="12"/>
                 <circle class="g-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round"
-                        pathLength="100" stroke-dasharray="34 100" transform="rotate(-90 60 60)"/>
-                <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central">34%</text>
+                        pathLength="100" stroke-dasharray="0 100" transform="rotate(-90 60 60)"/>
+                <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central" data-target="34">34%</text>
               </svg>
               <div class="g-count dg-num">68 of 200</div>
               <div class="g-lbl">Target accounts match</div>
@@ -379,8 +422,8 @@ footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
               <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="12 of 35 open opportunities match, 34 percent">
                 <circle class="g-track" cx="60" cy="60" r="52" fill="none" stroke-width="12"/>
                 <circle class="g-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round"
-                        pathLength="100" stroke-dasharray="34 100" transform="rotate(-90 60 60)"/>
-                <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central">34%</text>
+                        pathLength="100" stroke-dasharray="0 100" transform="rotate(-90 60 60)"/>
+                <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central" data-target="34">34%</text>
               </svg>
               <div class="g-count dg-num">12 of 35</div>
               <div class="g-lbl">Open opportunities match</div>
@@ -392,38 +435,81 @@ footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
   </div>
 </section>
 
-<!-- ===== CLOSING CTA ===== -->
-<section class="cta">
-  <div class="cta-inner">
-    <span class="eyebrow">ICP Analytics</span>
-    <h2>Stop Spending Your Next Quarter's Budget on Last Year's ICP.</h2>
-    <p>Use what you've won and what you've lost to decide who gets the next dollar.</p>
-    <a href="#formCard" class="btn btn-light btn-lg" id="ctaBtn">Get a Free ICP Analysis <span class="arrow" aria-hidden="true">→</span></a>
-  </div>
-</section>
+  <!-- ===== UNIFIED CLOSING SECTION: MOON DOME CTA + FOOTER ===== -->
+  <footer class="cta-footer" id="ctaSection">
+    <div class="cta-bloom" aria-hidden="true"></div>
+    <div class="cta-stars-tex" aria-hidden="true"></div>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="wrap foot-inner">
-    <div class="brandmark" aria-label="DiGGrowth">
-      <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DiGGrowth">
-        <path d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z" fill="white"/>
-        <path d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z" fill="white"/>
-        <path d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z" fill="white"/>
-        <path d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z" fill="#9149FF"/>
-        <path d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z" fill="#9149FF"/>
-        <path d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z" fill="#9149FF"/>
-        <path d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z" fill="#9149FF"/>
-        <path d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z" fill="#9149FF"/>
-        <path d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z" fill="#9149FF"/>
-        <path d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707" fill="#9149FF"/>
-        <path d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z" fill="white"/>
-      </svg>
+    <div class="moon-stage">
+      <!-- Orbit tracks with two shooting stars moving around the moon dome -->
+      <div class="comet-track" aria-hidden="true">
+        <div class="shooting-comet comet-1">
+          <div class="comet-tail"></div>
+          <div class="comet-head"></div>
+        </div>
+        <div class="shooting-comet comet-2">
+          <div class="comet-tail"></div>
+          <div class="comet-head"></div>
+        </div>
+      </div>
+
+      <!-- Celestial Moon Dome -->
+      <div class="moon-dome">
+        <span class="eyebrow moon-eyebrow">Powered by AI Agents</span>
+        <h2>Stop Spending Your Next Quarter’s Budget on Last Year’s ICP.</h2>
+        <p>Use what you’ve won and what you’ve lost to decide who gets the next dollar. </p>
+        <a href="#formCard" class="btn-moon" id="ctaBtn">Get a Free ICP Analysis<span class="arrow"
+            aria-hidden="true">›</span></a>
+      </div>
     </div>
-    <div class="links"><a href="https://diggrowth.com/privacy-policy/">Privacy Policy</a></div>
-    <p class="cr">Copyright © 2026. All Rights Reserved</p>
-  </div>
-</footer>
+
+    <!-- Glowing Purple Horizon Line -->
+    <div class="moon-horizon" aria-hidden="true"></div>
+
+    <!-- Integrated Footer Row -->
+    <div class="wrap foot-inner">
+      <div class="brandmark" aria-label="DiGGrowth">
+        <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="DiGGrowth">
+          <path
+            d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z"
+            fill="white" />
+          <path
+            d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z"
+            fill="white" />
+          <path
+            d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z"
+            fill="white" />
+          <path
+            d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z"
+            fill="#9149FF" />
+          <path
+            d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z"
+            fill="#9149FF" />
+          <path
+            d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z"
+            fill="#9149FF" />
+          <path
+            d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z"
+            fill="#9149FF" />
+          <path
+            d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z"
+            fill="#9149FF" />
+          <path
+            d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z"
+            fill="#9149FF" />
+          <path
+            d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707"
+            fill="#9149FF" />
+          <path
+            d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z"
+            fill="white" />
+        </svg>
+      </div>
+      <div class="links"><a href="https://diggrowth.com/privacy-policy/">Privacy Policy</a></div>
+      <p class="cr">Copyright © 2026. All Rights Reserved</p>
+    </div>
+  </footer>
 
 <script>
 (function(){
@@ -454,10 +540,39 @@ footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
     setTimeout(function(){ if(!card.classList.contains('sent')) nameI.focus(); },420);
   });
 
-  // reveal on scroll
+  // reveal on scroll & trigger chart animations
+  var snapAnimated=false;
+  var pcts=document.querySelectorAll('.donut .g-pct');
+  pcts.forEach(function(el){ el.textContent='0%'; });
+
+  function animateSnapNumbers(){
+    if(snapAnimated)return;
+    snapAnimated=true;
+    pcts.forEach(function(el){
+      var target=parseInt(el.getAttribute('data-target')||'34',10);
+      var start=0, dur=1100, startTime=null;
+      function step(now){
+        if(!startTime)startTime=now;
+        var p=Math.min((now-startTime)/dur,1);
+        var ease=1-Math.pow(1-p,3);
+        el.textContent=Math.round(start+(target-start)*ease)+'%';
+        if(p<1)requestAnimationFrame(step);
+      }
+      setTimeout(function(){ requestAnimationFrame(step); }, 200);
+    });
+  }
+
   var io=new IntersectionObserver(function(es){
-    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
-  },{threshold:.12});
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        en.target.classList.add('in');
+        if(en.target.classList.contains('snapshot')){
+          animateSnapNumbers();
+        }
+        io.unobserve(en.target);
+      }
+    });
+  },{threshold:.15});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
 })();
 </script>

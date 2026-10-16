@@ -1,465 +1,1779 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICP Analytics — Find Out Who Actually Buys | DiGGrowth</title>
-<meta name="description" content="AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and show which accounts deserve your attention. Get a free ICP analysis.">
-<link rel="canonical" href="https://diggrowth.com/ai-agents/icp-analytics/">
-<link rel="icon" type="image/png" href="Data/Favicon%20Dark.png">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ICP Analytics — Find Out Who Actually Buys | DiGGrowth">
-<meta property="og:description" content="AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and show which accounts deserve your attention.">
-<style>
-/* ============ DiGGrowth Design System — tokens.css (inlined) ============ */
-:root, [data-theme="light"] {
-  --purple-50:#f4edff;--purple-100:#e9dcff;--purple-200:#d6beff;--purple-300:#be98ff;--purple-400:#a570ff;--purple-500:#9149ff;--purple-600:#7b2ef0;--purple-700:#6420cc;--purple-800:#4e1aa0;--purple-900:#341067;
-  --ink-0:#ffffff;--ink-25:#fbfafd;--ink-50:#f6f5fa;--ink-100:#e8e7ef;--ink-200:#d0cfda;--ink-300:#a9a8b8;--ink-400:#7e7d92;--ink-500:#55546a;--ink-600:#383747;--ink-700:#262534;--ink-800:#1b1a28;--ink-850:#14131f;--ink-900:#0e0d16;--ink-950:#08070d;
-  --green-50:#e7f8ef;--green-500:#17b26a;--green-600:#0f8f53;--amber-50:#fef4e6;--amber-500:#f79009;--amber-600:#d67706;--red-50:#feecea;--red-500:#f04438;--red-600:#d3271a;--blue-50:#e8f2fe;--blue-500:#2e90fa;--blue-600:#1570cf;
-  --series-1:#9149ff;--series-2:#2dd4bf;--series-3:#fbbf24;--series-4:#60a5fa;
-  --bg-page:var(--ink-25);--bg-subtle:var(--ink-50);--bg-inset:var(--ink-100);--surface-card:var(--ink-0);--surface-brand:var(--purple-500);--surface-brand-subtle:var(--purple-50);
-  --text-heading:var(--ink-900);--text-body:var(--ink-600);--text-muted:var(--ink-400);--text-placeholder:var(--ink-300);--text-on-brand:var(--ink-0);--text-brand:var(--purple-600);--text-link:var(--purple-600);--text-link-hover:var(--purple-700);
-  --border-subtle:var(--ink-100);--border-default:var(--ink-200);--border-strong:var(--ink-300);--border-brand:var(--purple-500);
-  --status-success-fg:var(--green-600);--status-success-bg:var(--green-50);--status-warning-fg:var(--amber-600);--status-warning-bg:var(--amber-50);
-  --shadow-sm:0 1px 3px rgba(14,13,22,.08),0 1px 2px rgba(14,13,22,.04);--shadow-md:0 4px 12px rgba(14,13,22,.08),0 1px 3px rgba(14,13,22,.05);--shadow-lg:0 12px 32px rgba(14,13,22,.10),0 2px 8px rgba(14,13,22,.05);--shadow-xl:0 24px 56px rgba(14,13,22,.14),0 4px 12px rgba(14,13,22,.06);
-  --shadow-brand:0 8px 24px rgba(145,73,255,.28);--shadow-brand-sm:0 2px 8px rgba(145,73,255,.24);--ring-brand:0 0 0 3px rgba(145,73,255,.32);--inset-well:inset 0 1px 0 rgba(255,255,255,.04);
-}
-[data-theme="dark"]{
-  --bg-page:var(--ink-950);--bg-subtle:var(--ink-900);--bg-inset:var(--ink-850);--surface-card:var(--ink-900);--surface-raised:var(--ink-850);--surface-brand:var(--purple-500);--surface-brand-subtle:rgba(145,73,255,.14);
-  --text-heading:var(--ink-0);--text-body:var(--ink-300);--text-muted:var(--ink-400);--text-placeholder:var(--ink-500);--text-on-brand:var(--ink-0);--text-brand:var(--purple-300);--text-link:var(--purple-300);--text-link-hover:var(--purple-200);
-  --border-subtle:rgba(255,255,255,.07);--border-default:rgba(255,255,255,.12);--border-strong:rgba(255,255,255,.22);--border-brand:var(--purple-500);
-  --status-success-fg:#4ade80;--status-success-bg:rgba(23,178,106,.14);--status-warning-fg:#fbbf24;--status-warning-bg:rgba(247,144,9,.14);
-  --shadow-sm:0 1px 3px rgba(0,0,0,.5);--shadow-md:0 4px 14px rgba(0,0,0,.45);--shadow-lg:0 16px 40px rgba(0,0,0,.5);--shadow-xl:0 28px 64px rgba(0,0,0,.6);
-}
-:root{
-  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;--space-20:80px;--space-24:96px;
-  --radius-xs:4px;--radius-sm:6px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;--radius-2xl:20px;--radius-3xl:28px;--radius-pill:999px;--radius-circle:50%;
-  --text-2xs:11px;--text-xs:12px;--text-sm:13px;--text-base:14px;--text-md:16px;--text-lg:18px;--text-xl:20px;--text-2xl:24px;--text-3xl:30px;--text-4xl:38px;--text-5xl:48px;--text-6xl:60px;--text-7xl:76px;
-  --leading-tight:1.08;--leading-snug:1.22;--leading-normal:1.5;--leading-relaxed:1.65;
-  --tracking-tight:-0.02em;--tracking-wide:0.04em;--tracking-widest:0.12em;
-  --weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
-  --container-max:1200px;--gutter-page:24px;--gutter-page-lg:48px;--section-y:96px;--section-y-sm:64px;
-  --font-display:"Poppins",system-ui,sans-serif;--font-sans:"DM Sans","Poppins",system-ui,sans-serif;--font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
-}
-/* ============ bundle.css (inlined essentials) ============ */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap");
-:root{
-  --dur-fast:140ms;--dur-base:220ms;--dur-slow:340ms;
-  --ease-out:cubic-bezier(.16,1,.3,1);--ease-entrance:cubic-bezier(.16,1,.3,1);
-  --grad-brand:linear-gradient(135deg,#9149FF 0%,#6420CC 100%);
-  --grad-hero:radial-gradient(120% 90% at 50% -10%,rgba(145,73,255,.38) 0%,rgba(145,73,255,0) 62%);
-  --grad-ink:linear-gradient(180deg,#14131F 0%,#08070D 100%);
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--bg-page);color:var(--text-body);font:var(--weight-regular) var(--text-md)/var(--leading-relaxed) var(--font-sans);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
-h1,h2,h3,h4{color:var(--text-heading);margin:0;letter-spacing:var(--tracking-tight);font-family:var(--font-display);font-weight:var(--weight-semibold);line-height:var(--leading-snug)}
-p{margin:0}
-a{color:var(--text-link);text-decoration:none;transition:color var(--dur-fast) var(--ease-out)}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:none;box-shadow:var(--ring-brand);border-radius:var(--radius-sm)}
-button{font-family:inherit}
-.dg-num{font-variant-numeric:tabular-nums}
-::selection{background:var(--purple-700);color:#fff}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICP Analytics — Find Out Who Actually Buys | DiGGrowth</title>
+  <meta name="description"
+    content="AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and show which accounts deserve your attention. Get a free ICP analysis.">
+  <link rel="canonical" href="https://diggrowth.com/ai-agents/icp-analytics/">
+  <link rel="icon" type="image/png" href="Data/Favicon%20Dark.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ICP Analytics — Find Out Who Actually Buys | DiGGrowth">
+  <meta property="og:description"
+    content="AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and show which accounts deserve your attention.">
+  <style>
+    /* ============ DiGGrowth Design System — tokens.css (inlined) ============ */
+    :root,
+    [data-theme="light"] {
+      --purple-50: #f4edff;
+      --purple-100: #e9dcff;
+      --purple-200: #d6beff;
+      --purple-300: #be98ff;
+      --purple-400: #a570ff;
+      --purple-500: #9149ff;
+      --purple-600: #7b2ef0;
+      --purple-700: #6420cc;
+      --purple-800: #4e1aa0;
+      --purple-900: #341067;
+      --ink-0: #ffffff;
+      --ink-25: #fbfafd;
+      --ink-50: #f6f5fa;
+      --ink-100: #e8e7ef;
+      --ink-200: #d0cfda;
+      --ink-300: #a9a8b8;
+      --ink-400: #7e7d92;
+      --ink-500: #55546a;
+      --ink-600: #383747;
+      --ink-700: #262534;
+      --ink-800: #1b1a28;
+      --ink-850: #14131f;
+      --ink-900: #0e0d16;
+      --ink-950: #08070d;
+      --green-50: #e7f8ef;
+      --green-500: #17b26a;
+      --green-600: #0f8f53;
+      --amber-50: #fef4e6;
+      --amber-500: #f79009;
+      --amber-600: #d67706;
+      --red-50: #feecea;
+      --red-500: #f04438;
+      --red-600: #d3271a;
+      --blue-50: #e8f2fe;
+      --blue-500: #2e90fa;
+      --blue-600: #1570cf;
+      --series-1: #9149ff;
+      --series-2: #2dd4bf;
+      --series-3: #fbbf24;
+      --series-4: #60a5fa;
+      --bg-page: var(--ink-25);
+      --bg-subtle: var(--ink-50);
+      --bg-inset: var(--ink-100);
+      --surface-card: var(--ink-0);
+      --surface-brand: var(--purple-500);
+      --surface-brand-subtle: var(--purple-50);
+      --text-heading: var(--ink-900);
+      --text-body: var(--ink-600);
+      --text-muted: var(--ink-400);
+      --text-placeholder: var(--ink-300);
+      --text-on-brand: var(--ink-0);
+      --text-brand: var(--purple-600);
+      --text-link: var(--purple-600);
+      --text-link-hover: var(--purple-700);
+      --border-subtle: var(--ink-100);
+      --border-default: var(--ink-200);
+      --border-strong: var(--ink-300);
+      --border-brand: var(--purple-500);
+      --status-success-fg: var(--green-600);
+      --status-success-bg: var(--green-50);
+      --status-warning-fg: var(--amber-600);
+      --status-warning-bg: var(--amber-50);
+      --shadow-sm: 0 1px 3px rgba(14, 13, 22, .08), 0 1px 2px rgba(14, 13, 22, .04);
+      --shadow-md: 0 4px 12px rgba(14, 13, 22, .08), 0 1px 3px rgba(14, 13, 22, .05);
+      --shadow-lg: 0 12px 32px rgba(14, 13, 22, .10), 0 2px 8px rgba(14, 13, 22, .05);
+      --shadow-xl: 0 24px 56px rgba(14, 13, 22, .14), 0 4px 12px rgba(14, 13, 22, .06);
+      --shadow-brand: 0 8px 24px rgba(145, 73, 255, .28);
+      --shadow-brand-sm: 0 2px 8px rgba(145, 73, 255, .24);
+      --ring-brand: 0 0 0 3px rgba(145, 73, 255, .32);
+      --inset-well: inset 0 1px 0 rgba(255, 255, 255, .04);
+    }
 
-/* ============ Page layout ============ */
-.wrap{max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter-page)}
-@media(min-width:900px){.wrap{padding:0 var(--gutter-page-lg)}}
-.eyebrow{font:var(--weight-semibold) var(--text-xs)/1 var(--font-sans);letter-spacing:var(--tracking-widest);text-transform:uppercase;color:var(--text-brand)}
+    [data-theme="dark"] {
+      --bg-page: var(--ink-950);
+      --bg-subtle: var(--ink-900);
+      --bg-inset: var(--ink-850);
+      --surface-card: var(--ink-900);
+      --surface-raised: var(--ink-850);
+      --surface-brand: var(--purple-500);
+      --surface-brand-subtle: rgba(145, 73, 255, .14);
+      --text-heading: var(--ink-0);
+      --text-body: var(--ink-300);
+      --text-muted: var(--ink-400);
+      --text-placeholder: var(--ink-500);
+      --text-on-brand: var(--ink-0);
+      --text-brand: var(--purple-300);
+      --text-link: var(--purple-300);
+      --text-link-hover: var(--purple-200);
+      --border-subtle: rgba(255, 255, 255, .07);
+      --border-default: rgba(255, 255, 255, .12);
+      --border-strong: rgba(255, 255, 255, .22);
+      --border-brand: var(--purple-500);
+      --status-success-fg: #4ade80;
+      --status-success-bg: rgba(23, 178, 106, .14);
+      --status-warning-fg: #fbbf24;
+      --status-warning-bg: rgba(247, 144, 9, .14);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .5);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, .5);
+      --shadow-xl: 0 28px 64px rgba(0, 0, 0, .6);
+    }
 
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-family:var(--font-sans);font-weight:var(--weight-semibold);font-size:var(--text-md);line-height:1;padding:0 var(--space-6);height:var(--control-h-lg,48px);border-radius:var(--radius-pill);border:1px solid transparent;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out);white-space:nowrap}
-.btn-primary{background:var(--surface-brand);color:var(--text-on-brand);box-shadow:var(--shadow-brand)}
-.btn-primary:hover{background:var(--surface-brand-hover,var(--purple-600));box-shadow:0 10px 30px rgba(145,73,255,.4);transform:translateY(-1px);text-decoration:none;color:var(--text-on-brand)}
-.btn-primary:active{background:var(--purple-700);transform:scale(.98)}
-.btn-primary:disabled{background:var(--bg-inset);color:var(--text-placeholder);box-shadow:none;cursor:not-allowed;transform:none}
-.btn-lg{height:52px;font-size:var(--text-lg)}
-.btn .arrow{transition:transform var(--dur-fast) var(--ease-out)}
-.btn:hover .arrow{transform:translateX(3px)}
+    :root {
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+      --radius-xs: 4px;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-2xl: 20px;
+      --radius-3xl: 28px;
+      --radius-pill: 999px;
+      --radius-circle: 50%;
+      --text-2xs: 11px;
+      --text-xs: 12px;
+      --text-sm: 13px;
+      --text-base: 14px;
+      --text-md: 16px;
+      --text-lg: 18px;
+      --text-xl: 20px;
+      --text-2xl: 24px;
+      --text-3xl: 30px;
+      --text-4xl: 38px;
+      --text-5xl: 48px;
+      --text-6xl: 60px;
+      --text-7xl: 76px;
+      --leading-tight: 1.08;
+      --leading-snug: 1.22;
+      --leading-normal: 1.5;
+      --leading-relaxed: 1.65;
+      --tracking-tight: -0.02em;
+      --tracking-wide: 0.04em;
+      --tracking-widest: 0.12em;
+      --weight-regular: 400;
+      --weight-medium: 500;
+      --weight-semibold: 600;
+      --weight-bold: 700;
+      --container-max: 1200px;
+      --gutter-page: 24px;
+      --gutter-page-lg: 48px;
+      --section-y: 96px;
+      --section-y-sm: 64px;
+      --font-display: "Poppins", system-ui, sans-serif;
+      --font-sans: "DM Sans", "Poppins", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    }
 
-/* grid texture on dark */
-.grid-tex{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(90% 70% at 50% 0%,#000 0%,transparent 70%);mask-image:radial-gradient(90% 70% at 50% 0%,#000 0%,transparent 70%)}
+    /* ============ bundle.css (inlined essentials) ============ */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
-/* ===== HERO ===== */
-.hero{position:relative;background:var(--ink-950);overflow:hidden;border-bottom:1px solid var(--border-subtle)}
-.hero-bloom{position:absolute;inset:0;background:var(--grad-hero);pointer-events:none}
-.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:var(--space-16);align-items:center;padding:var(--space-20) 0 var(--space-24)}
-@media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:var(--space-10);padding:var(--space-12) 0 var(--space-16)}}
-.brandmark{display:inline-flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-10)}
-.brandmark svg{display:block;height:32px;width:auto}
-.brandmark .sq{width:34px;height:34px;border-radius:var(--radius-squircle,36%);background:var(--grad-brand);display:grid;place-items:center;box-shadow:var(--shadow-brand-sm)}
-.brandmark .wm{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-xl);letter-spacing:-0.01em;color:#fff}
-.brandmark .wm b{color:var(--purple-400);font-weight:var(--weight-semibold)}
-.hero .agent-tag{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-1) var(--space-3) var(--space-1) var(--space-1);border:1px solid var(--border-subtle);border-radius:var(--radius-pill);background:var(--surface-brand-subtle);margin-bottom:var(--space-5)}
-.agent-tag .dot{width:22px;height:22px;border-radius:var(--radius-sm);background:var(--surface-brand-subtle);display:grid;place-items:center;color:var(--purple-300)}
-.agent-tag span{font:var(--weight-semibold) var(--text-xs)/1 var(--font-sans);letter-spacing:var(--tracking-wide);color:var(--purple-200);text-transform:uppercase}
-.hero h1{font-size:var(--text-6xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:#fff;margin-bottom:var(--space-6)}
-.hero h1 .hl{color:transparent;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text}
-@media(max-width:960px){.hero h1{font-size:var(--text-5xl)}}
-@media(max-width:560px){.hero h1{font-size:var(--text-4xl)}}
-.hero .sub{font-size:var(--text-lg);line-height:var(--leading-relaxed);color:var(--ink-300);max-width:30em;margin-bottom:var(--space-5)}
-.hero .lead-in{font-size:var(--text-md);color:var(--ink-400);max-width:30em}
+    :root {
+      --dur-fast: 140ms;
+      --dur-base: 220ms;
+      --dur-slow: 340ms;
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
+      --ease-entrance: cubic-bezier(.16, 1, .3, 1);
+      --grad-brand: linear-gradient(135deg, #9149FF 0%, #6420CC 100%);
+      --grad-hero: radial-gradient(120% 90% at 50% -10%, rgba(145, 73, 255, .38) 0%, rgba(145, 73, 255, 0) 62%);
+      --grad-ink: linear-gradient(180deg, #14131F 0%, #08070D 100%);
+    }
 
-/* ===== lead form card ===== */
-.form-card{background:var(--ink-900);border:1px solid var(--border-subtle);border-radius:var(--radius-2xl);padding:var(--space-8);box-shadow:var(--shadow-xl)}
-.form-card h2{font-size:var(--text-xl);color:#fff;margin-bottom:var(--space-1)}
-.form-card .fine{font-size:var(--text-base);color:var(--ink-400);margin-bottom:var(--space-6)}
-.field{margin-bottom:var(--space-4)}
-.field label{display:block;font:var(--weight-medium) var(--text-base)/var(--leading-normal) var(--font-sans);color:var(--ink-300);margin-bottom:var(--space-2)}
-.field input{width:100%;height:var(--control-h-lg,48px);padding:0 var(--space-4);font-family:var(--font-sans);font-size:var(--text-md);color:#fff;background:var(--ink-850);border:1px solid var(--border-default);border-radius:var(--radius-md);transition:border-color var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out);box-shadow:var(--inset-well)}
-.field input::placeholder{color:var(--text-placeholder)}
-.field input:focus{outline:none;border-color:var(--border-brand);box-shadow:var(--ring-brand)}
-.field input.invalid{border-color:var(--red-500);box-shadow:0 0 0 3px rgba(240,68,56,.28)}
-.field .err{display:none;font-size:var(--text-sm);color:#fb7185;margin-top:var(--space-2)}
-.field.show-err .err{display:block}
-.form-card .btn{width:100%;margin-top:var(--space-2)}
-.form-card .post{font-size:var(--text-sm);line-height:var(--leading-normal);color:var(--ink-400);margin-top:var(--space-4);text-align:center}
-.form-success{display:none;text-align:center;padding:var(--space-6) var(--space-2)}
-.form-success.on{display:block}
-.form-success .check{width:56px;height:56px;border-radius:var(--radius-circle);background:var(--status-success-bg);color:var(--status-success-fg);display:grid;place-items:center;margin:0 auto var(--space-4)}
-.form-success h3{color:#fff;font-size:var(--text-xl);margin-bottom:var(--space-2)}
-.form-success p{color:var(--ink-300);font-size:var(--text-md);max-width:26em;margin:0 auto}
-.form-card.sent form{display:none}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
 
-/* ===== REVEAL section (dark) ===== */
-.reveal{position:relative;background:var(--grad-ink);padding:var(--section-y) 0;overflow:hidden}
-.reveal .grid-tex{-webkit-mask-image:radial-gradient(90% 80% at 50% 0%,#000,transparent 75%);mask-image:radial-gradient(90% 80% at 50% 0%,#000,transparent 75%)}
-.sec-head{position:relative;text-align:center;max-width:46rem;margin:0 auto var(--space-12)}
-.sec-head .eyebrow{color:var(--purple-300)}
-.sec-head h2{font-size:var(--text-4xl);color:#fff;margin:var(--space-3) 0 var(--space-4);letter-spacing:var(--tracking-tight)}
-@media(max-width:560px){.sec-head h2{font-size:var(--text-3xl)}}
-.sec-head p{font-size:var(--text-lg);color:var(--ink-300)}
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth
+    }
 
-.reveal-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);margin-bottom:var(--space-16)}
-@media(max-width:900px){.reveal-grid{grid-template-columns:1fr}}
-.rcard{background:var(--ink-900);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:var(--space-8);transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out)}
-.rcard:hover{transform:translateY(-3px);border-color:var(--border-default);box-shadow:var(--shadow-lg)}
-.rcard .well{width:44px;height:44px;border-radius:var(--radius-lg);background:var(--surface-brand-subtle);color:var(--purple-300);display:grid;place-items:center;margin-bottom:var(--space-5)}
-.rcard h3{color:#fff;font-size:var(--text-xl);margin-bottom:var(--space-3)}
-.rcard p{font-size:var(--text-md);line-height:var(--leading-relaxed);color:var(--ink-300)}
+    body {
+      margin: 0;
+      background: var(--bg-page);
+      color: var(--text-body);
+      font: var(--weight-regular) var(--text-md)/var(--leading-relaxed) var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      text-wrap: pretty;
+      overflow-x: hidden
+    }
 
-/* ===== snapshot panel ===== */
-.snapshot{position:relative;background:var(--ink-900);border:1px solid var(--border-subtle);border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);overflow:hidden}
-.snap-top{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-5) var(--space-8);border-bottom:1px solid var(--border-subtle);flex-wrap:wrap}
-.snap-top .title{display:flex;align-items:center;gap:var(--space-3)}
-.snap-top .title .well{width:34px;height:34px;border-radius:var(--radius-md);background:var(--surface-brand-subtle);color:var(--purple-300);display:grid;place-items:center}
-.snap-top .title b{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-lg);color:#fff}
-.fict{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-400);background:var(--ink-850);border:1px solid var(--border-subtle);border-radius:var(--radius-pill);padding:var(--space-1) var(--space-3)}
-.snap-body{padding:var(--space-8)}
-.seg-head{font:var(--weight-semibold) var(--text-xs)/1 var(--font-sans);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--purple-300);margin-bottom:var(--space-3)}
-.seg-chip{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);margin-bottom:var(--space-8)}
-.seg-chip .big{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-2xl);color:#fff;letter-spacing:var(--tracking-tight)}
-.seg-chip .pill{font-family:var(--font-mono);font-size:var(--text-sm);color:var(--purple-200);background:var(--surface-brand-subtle);border:1px solid rgba(145,73,255,.3);border-radius:var(--radius-pill);padding:var(--space-1) var(--space-3)}
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--text-heading);
+      margin: 0;
+      letter-spacing: var(--tracking-tight);
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      line-height: var(--leading-snug)
+    }
 
-/* two-column split: bars left, gauges right */
-.snap-split{display:grid;grid-template-columns:1fr 272px;gap:var(--space-10)}
-@media(max-width:860px){.snap-split{grid-template-columns:1fr;gap:var(--space-8)}}
-.evidence .cap{font:var(--weight-medium) var(--text-sm)/1 var(--font-sans);color:var(--ink-400);margin-bottom:var(--space-5)}
+    p {
+      margin: 0
+    }
 
-/* bar chart */
-.bars{display:flex;flex-direction:column;gap:var(--space-5)}
-.bgroup-head{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-3)}
-.bgroup-head .bic{width:26px;height:26px;flex:none;border-radius:var(--radius-md);background:var(--surface-brand-subtle);color:var(--purple-300);display:grid;place-items:center}
-.bgroup-head .bname{font:var(--weight-medium) var(--text-base)/1 var(--font-sans);color:#fff}
-.brow{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:var(--space-3);margin-top:var(--space-2)}
-.brow .bseg{font:var(--weight-regular) var(--text-sm)/1.2 var(--font-sans);color:var(--ink-400)}
-.btrack{height:10px;border-radius:var(--radius-pill);background:var(--ink-800);overflow:hidden;box-shadow:var(--inset-well)}
-.bfill{display:block;height:100%;width:var(--w);border-radius:var(--radius-pill);transform-origin:left;animation:fill var(--dur-slow) var(--ease-out) both}
-.bfill.win{background:var(--grad-brand);box-shadow:var(--shadow-brand-sm)}
-.bfill.other{background:var(--ink-500)}
-.brow .bval{font-family:var(--font-mono);font-size:var(--text-base);font-variant-numeric:tabular-nums;text-align:right;min-width:52px}
-.bval.win{color:var(--purple-300);font-weight:var(--weight-medium)}
-.bval.other{color:var(--ink-400)}
-.legend{display:flex;gap:var(--space-5);margin-top:var(--space-6);padding-top:var(--space-5);border-top:1px solid var(--border-subtle)}
-.legend .lg{display:inline-flex;align-items:center;gap:var(--space-2);font:var(--weight-medium) var(--text-sm)/1 var(--font-sans);color:var(--ink-400)}
-.legend .sw{width:12px;height:12px;border-radius:var(--radius-xs);flex:none}
-.legend .sw.win{background:var(--grad-brand)}
-.legend .sw.other{background:var(--ink-500)}
-@media(max-width:560px){.brow{grid-template-columns:84px 1fr auto;gap:var(--space-2)}}
+    a {
+      color: var(--text-link);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease-out)
+    }
 
-/* donut gauges */
-.gauges{display:flex;flex-direction:column;gap:var(--space-6);justify-content:center}
-@media(max-width:860px){.gauges{flex-direction:row;gap:var(--space-6)}.gauge{flex:1}}
-@media(max-width:420px){.gauges{flex-direction:column}}
-.gauge{text-align:center}
-.donut{width:116px;height:116px;display:block;margin:0 auto var(--space-3)}
-.donut .g-track{stroke:var(--ink-800)}
-.donut .g-fill{stroke:url(#gaugeGrad);animation:donut var(--dur-slow) var(--ease-out) both}
-@keyframes donut{from{stroke-dasharray:0 100}}
-.donut .g-pct{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:26px;fill:#fff;letter-spacing:var(--tracking-tight)}
-.gauge .g-count{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-xl);color:#fff;letter-spacing:var(--tracking-tight)}
-.gauge .g-lbl{font:var(--weight-regular) var(--text-sm)/1.3 var(--font-sans);color:var(--ink-400);margin-top:var(--space-1)}
-@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: none;
+      box-shadow: var(--ring-brand);
+      border-radius: var(--radius-sm)
+    }
 
-/* ===== CTA band ===== */
-.cta{position:relative;background:var(--grad-brand);overflow:hidden}
-.cta::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 15% 0%,rgba(255,255,255,.14),transparent 55%);pointer-events:none}
-.cta-inner{position:relative;text-align:center;padding:var(--section-y) var(--gutter-page)}
-.cta .eyebrow{color:rgba(255,255,255,.85)}
-.cta h2{color:#fff;font-size:var(--text-5xl);letter-spacing:var(--tracking-tight);margin:var(--space-3) auto var(--space-4);max-width:18em}
-@media(max-width:560px){.cta h2{font-size:var(--text-3xl)}}
-.cta p{color:rgba(255,255,255,.9);font-size:var(--text-lg);max-width:34em;margin:0 auto var(--space-8)}
-.cta .btn-light{background:#fff;color:var(--purple-700);box-shadow:0 10px 30px rgba(8,7,13,.3)}
-.cta .btn-light:hover{background:#fff;transform:translateY(-1px);box-shadow:0 14px 36px rgba(8,7,13,.4);color:var(--purple-700)}
-.cta .btn-light:active{transform:scale(.98)}
+    button {
+      font-family: inherit
+    }
 
-/* ===== footer ===== */
-footer{background:var(--ink-950);border-top:1px solid var(--border-subtle)}
-.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-10) 0;flex-wrap:wrap}
-.foot-inner .brandmark{margin-bottom:0}
-footer .links{display:flex;align-items:center;gap:var(--space-6);font-size:var(--text-base);font-weight:var(--weight-medium)}
-footer .links a{color:var(--ink-400)}
-footer .links a:hover{color:var(--ink-200);text-decoration:none}
-footer .cr{font-size:var(--text-sm);color:var(--ink-500)}
+    .dg-num {
+      font-variant-numeric: tabular-nums
+    }
 
-/* reveal-on-scroll */
-.rv{opacity:0;transform:translateY(18px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
-.rv.in{opacity:1;transform:none}
-</style>
+    ::selection {
+      background: var(--purple-700);
+      color: #fff
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto
+      }
+    }
+
+    /* ============ Page layout ============ */
+    .wrap {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--gutter-page)
+    }
+
+    @media(min-width:900px) {
+      .wrap {
+        padding: 0 var(--gutter-page-lg)
+      }
+    }
+
+    .eyebrow {
+      font: var(--weight-semibold) var(--text-xs)/1 var(--font-sans);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-brand)
+    }
+
+    /* buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-sans);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-md);
+      line-height: 1;
+      padding: 0 var(--space-6);
+      height: var(--control-h-lg, 48px);
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+      white-space: nowrap
+    }
+
+    .btn-primary {
+      background: var(--surface-brand);
+      color: var(--text-on-brand);
+      box-shadow: var(--shadow-brand)
+    }
+
+    .btn-primary:hover {
+      background: var(--surface-brand-hover, var(--purple-600));
+      box-shadow: 0 10px 30px rgba(145, 73, 255, .4);
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: var(--text-on-brand)
+    }
+
+    .btn-primary:active {
+      background: var(--purple-700);
+      transform: scale(.98)
+    }
+
+    .btn-primary:disabled {
+      background: var(--bg-inset);
+      color: var(--text-placeholder);
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .btn-lg {
+      height: 52px;
+      font-size: var(--text-lg)
+    }
+
+    .btn .arrow {
+      transition: transform var(--dur-fast) var(--ease-out)
+    }
+
+    .btn:hover .arrow {
+      transform: translateX(3px)
+    }
+
+    /* grid texture on dark */
+    .grid-tex {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(90% 70% at 50% 0%, #000 0%, transparent 70%);
+      mask-image: radial-gradient(90% 70% at 50% 0%, #000 0%, transparent 70%)
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      background: var(--ink-950);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle)
+    }
+
+    .hero-bloom {
+      position: absolute;
+      inset: 0;
+      background: var(--grad-hero);
+      pointer-events: none
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: var(--space-16);
+      align-items: center;
+      padding: var(--space-20) 0 var(--space-24)
+    }
+
+    @media(max-width:960px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+        padding: var(--space-12) 0 var(--space-16)
+      }
+    }
+
+    .brandmark {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-10)
+    }
+
+    .brandmark svg {
+      display: block;
+      height: 32px;
+      width: auto
+    }
+
+    .brandmark .sq {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-squircle, 36%);
+      background: var(--grad-brand);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow-brand-sm)
+    }
+
+    .brandmark .wm {
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-xl);
+      letter-spacing: -0.01em;
+      color: #fff
+    }
+
+    .brandmark .wm b {
+      color: var(--purple-400);
+      font-weight: var(--weight-semibold)
+    }
+
+    .hero .agent-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      background: var(--surface-brand-subtle);
+      margin-bottom: var(--space-5)
+    }
+
+    .agent-tag .dot {
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-brand-subtle);
+      display: grid;
+      place-items: center;
+      color: var(--purple-300)
+    }
+
+    .agent-tag span {
+      font: var(--weight-semibold) var(--text-xs)/1 var(--font-sans);
+      letter-spacing: var(--tracking-wide);
+      color: var(--purple-200);
+      text-transform: uppercase
+    }
+
+    .hero h1 {
+      font-size: var(--text-6xl);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: #fff;
+      margin-bottom: var(--space-6)
+    }
+
+    .hero h1 .hl {
+      color: transparent;
+      background: var(--grad-brand);
+      -webkit-background-clip: text;
+      background-clip: text
+    }
+
+    @media(max-width:960px) {
+      .hero h1 {
+        font-size: var(--text-5xl)
+      }
+    }
+
+    @media(max-width:560px) {
+      .hero h1 {
+        font-size: var(--text-4xl)
+      }
+    }
+
+    .hero .sub {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+      color: var(--ink-300);
+      max-width: 30em;
+      margin-bottom: var(--space-5)
+    }
+
+    .hero .lead-in {
+      font-size: var(--text-md);
+      color: var(--ink-400);
+      max-width: 30em
+    }
+
+    /* ===== lead form card ===== */
+    .form-card {
+      background: var(--ink-900);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-xl)
+    }
+
+    .form-card h2 {
+      font-size: var(--text-xl);
+      color: #fff;
+      margin-bottom: var(--space-1)
+    }
+
+    .form-card .fine {
+      font-size: var(--text-base);
+      color: var(--ink-400);
+      margin-bottom: var(--space-6)
+    }
+
+    .field {
+      margin-bottom: var(--space-4)
+    }
+
+    .field label {
+      display: block;
+      font: var(--weight-medium) var(--text-base)/var(--leading-normal) var(--font-sans);
+      color: var(--ink-300);
+      margin-bottom: var(--space-2)
+    }
+
+    .field input {
+      width: 100%;
+      height: var(--control-h-lg, 48px);
+      padding: 0 var(--space-4);
+      font-family: var(--font-sans);
+      font-size: var(--text-md);
+      color: #fff;
+      background: var(--ink-850);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+      box-shadow: var(--inset-well)
+    }
+
+    .field input::placeholder {
+      color: var(--text-placeholder)
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--border-brand);
+      box-shadow: var(--ring-brand)
+    }
+
+    .field input.invalid {
+      border-color: var(--red-500);
+      box-shadow: 0 0 0 3px rgba(240, 68, 56, .28)
+    }
+
+    .field .err {
+      display: none;
+      font-size: var(--text-sm);
+      color: #fb7185;
+      margin-top: var(--space-2)
+    }
+
+    .field.show-err .err {
+      display: block
+    }
+
+    .form-card .btn {
+      width: 100%;
+      margin-top: var(--space-2)
+    }
+
+    .form-card .post {
+      font-size: var(--text-sm);
+      line-height: var(--leading-normal);
+      color: var(--ink-400);
+      margin-top: var(--space-4);
+      text-align: center
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-6) var(--space-2)
+    }
+
+    .form-success.on {
+      display: block
+    }
+
+    .form-success .check {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-circle);
+      background: var(--status-success-bg);
+      color: var(--status-success-fg);
+      display: grid;
+      place-items: center;
+      margin: 0 auto var(--space-4)
+    }
+
+    .form-success h3 {
+      color: #fff;
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-2)
+    }
+
+    .form-success p {
+      color: var(--ink-300);
+      font-size: var(--text-md);
+      max-width: 26em;
+      margin: 0 auto
+    }
+
+    .form-card.sent form {
+      display: none
+    }
+
+    /* ===== REVEAL section (dark) ===== */
+    .reveal {
+      position: relative;
+      background: var(--grad-ink);
+      padding: var(--section-y) 0;
+      overflow: hidden
+    }
+
+    .reveal .grid-tex {
+      -webkit-mask-image: radial-gradient(90% 80% at 50% 0%, #000, transparent 75%);
+      mask-image: radial-gradient(90% 80% at 50% 0%, #000, transparent 75%)
+    }
+
+    .sec-head {
+      position: relative;
+      text-align: center;
+      max-width: 46rem;
+      margin: 0 auto var(--space-12)
+    }
+
+    .sec-head .eyebrow {
+      color: var(--purple-300)
+    }
+
+    .sec-head h2 {
+      font-size: var(--text-4xl);
+      color: #fff;
+      margin: var(--space-3) 0 var(--space-4);
+      letter-spacing: var(--tracking-tight)
+    }
+
+    @media(max-width:560px) {
+      .sec-head h2 {
+        font-size: var(--text-3xl)
+      }
+    }
+
+    .sec-head p {
+      font-size: var(--text-lg);
+      color: var(--ink-300)
+    }
+
+    .reveal-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-16)
+    }
+
+    @media(max-width:900px) {
+      .reveal-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .rcard {
+      background: var(--ink-900);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out)
+    }
+
+    .rcard:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-default);
+      box-shadow: var(--shadow-lg)
+    }
+
+    .rcard .well {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-brand-subtle);
+      color: var(--purple-300);
+      display: grid;
+      place-items: center;
+      margin-bottom: var(--space-5)
+    }
+
+    .rcard h3 {
+      color: #fff;
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3)
+    }
+
+    .rcard p {
+      font-size: var(--text-md);
+      line-height: var(--leading-relaxed);
+      color: var(--ink-300)
+    }
+
+    /* ===== snapshot panel ===== */
+    .snapshot {
+      position: relative;
+      background: var(--ink-900);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden
+    }
+
+    .snap-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-8);
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap
+    }
+
+    .snap-top .title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3)
+    }
+
+    .snap-top .title .well {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      background: var(--surface-brand-subtle);
+      color: var(--purple-300);
+      display: grid;
+      place-items: center
+    }
+
+    .snap-top .title b {
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-lg);
+      color: #fff
+    }
+
+    .fict {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--ink-400);
+      background: var(--ink-850);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: var(--space-1) var(--space-3)
+    }
+
+    .snap-body {
+      padding: var(--space-8)
+    }
+
+    .seg-head {
+      font: var(--weight-semibold) var(--text-xs)/1 var(--font-sans);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--purple-300);
+      margin-bottom: var(--space-3)
+    }
+
+    .seg-chip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-8)
+    }
+
+    .seg-chip .big {
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-2xl);
+      color: #fff;
+      letter-spacing: var(--tracking-tight)
+    }
+
+    .seg-chip .pill {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--purple-200);
+      background: var(--surface-brand-subtle);
+      border: 1px solid rgba(145, 73, 255, .3);
+      border-radius: var(--radius-pill);
+      padding: var(--space-1) var(--space-3)
+    }
+
+    /* two-column split: bars left, gauges right */
+    .snap-split {
+      display: grid;
+      grid-template-columns: 1fr 272px;
+      gap: var(--space-10)
+    }
+
+    @media(max-width:860px) {
+      .snap-split {
+        grid-template-columns: 1fr;
+        gap: var(--space-8)
+      }
+    }
+
+    .evidence .cap {
+      font: var(--weight-medium) var(--text-sm)/1 var(--font-sans);
+      color: var(--ink-400);
+      margin-bottom: var(--space-5)
+    }
+
+    /* bar chart */
+    .bars {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5)
+    }
+
+    .bgroup-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3)
+    }
+
+    .bgroup-head .bic {
+      width: 26px;
+      height: 26px;
+      flex: none;
+      border-radius: var(--radius-md);
+      background: var(--surface-brand-subtle);
+      color: var(--purple-300);
+      display: grid;
+      place-items: center
+    }
+
+    .bgroup-head .bname {
+      font: var(--weight-medium) var(--text-base)/1 var(--font-sans);
+      color: #fff
+    }
+
+    .brow {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      align-items: center;
+      gap: var(--space-3);
+      margin-top: var(--space-2)
+    }
+
+    .brow .bseg {
+      font: var(--weight-regular) var(--text-sm)/1.2 var(--font-sans);
+      color: var(--ink-400)
+    }
+
+    .btrack {
+      height: 10px;
+      border-radius: var(--radius-pill);
+      background: var(--ink-800);
+      overflow: hidden;
+      box-shadow: var(--inset-well)
+    }
+
+    .bfill {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      border-radius: var(--radius-pill);
+      transform-origin: left;
+      transform: scaleX(0)
+    }
+
+    .bfill.win {
+      background: var(--grad-brand);
+      box-shadow: var(--shadow-brand-sm)
+    }
+
+    .bfill.other {
+      background: var(--ink-500)
+    }
+
+    .brow .bval {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      min-width: 52px;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out)
+    }
+
+    .bval.win {
+      color: var(--purple-300);
+      font-weight: var(--weight-medium)
+    }
+
+    .bval.other {
+      color: var(--ink-400)
+    }
+
+    /* Animate bars when snapshot comes on screen */
+    .snapshot.in .bfill {
+      animation: fill 850ms cubic-bezier(.16, 1, .3, 1) both
+    }
+
+    .snapshot.in .bgroup:nth-child(1) .brow:nth-child(2) .bfill {
+      animation-delay: 100ms
+    }
+
+    .snapshot.in .bgroup:nth-child(1) .brow:nth-child(3) .bfill {
+      animation-delay: 180ms
+    }
+
+    .snapshot.in .bgroup:nth-child(2) .brow:nth-child(2) .bfill {
+      animation-delay: 260ms
+    }
+
+    .snapshot.in .bgroup:nth-child(2) .brow:nth-child(3) .bfill {
+      animation-delay: 340ms
+    }
+
+    .snapshot.in .bgroup:nth-child(3) .brow:nth-child(2) .bfill {
+      animation-delay: 420ms
+    }
+
+    .snapshot.in .bgroup:nth-child(3) .brow:nth-child(3) .bfill {
+      animation-delay: 500ms
+    }
+
+    .snapshot.in .brow .bval {
+      opacity: 1;
+      transform: none
+    }
+
+    .snapshot.in .bgroup:nth-child(1) .brow:nth-child(2) .bval {
+      transition-delay: 200ms
+    }
+
+    .snapshot.in .bgroup:nth-child(1) .brow:nth-child(3) .bval {
+      transition-delay: 280ms
+    }
+
+    .snapshot.in .bgroup:nth-child(2) .brow:nth-child(2) .bval {
+      transition-delay: 360ms
+    }
+
+    .snapshot.in .bgroup:nth-child(2) .brow:nth-child(3) .bval {
+      transition-delay: 440ms
+    }
+
+    .snapshot.in .bgroup:nth-child(3) .brow:nth-child(2) .bval {
+      transition-delay: 520ms
+    }
+
+    .snapshot.in .bgroup:nth-child(3) .brow:nth-child(3) .bval {
+      transition-delay: 600ms
+    }
+
+    .legend {
+      display: flex;
+      gap: var(--space-5);
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--border-subtle)
+    }
+
+    .legend .lg {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font: var(--weight-medium) var(--text-sm)/1 var(--font-sans);
+      color: var(--ink-400)
+    }
+
+    .legend .sw {
+      width: 12px;
+      height: 12px;
+      border-radius: var(--radius-xs);
+      flex: none
+    }
+
+    .legend .sw.win {
+      background: var(--grad-brand)
+    }
+
+    .legend .sw.other {
+      background: var(--ink-500)
+    }
+
+    @media(max-width:560px) {
+      .brow {
+        grid-template-columns: 84px 1fr auto;
+        gap: var(--space-2)
+      }
+    }
+
+    /* donut gauges */
+    .gauges {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      justify-content: center
+    }
+
+    @media(max-width:860px) {
+      .gauges {
+        flex-direction: row;
+        gap: var(--space-6)
+      }
+
+      .gauge {
+        flex: 1
+      }
+    }
+
+    @media(max-width:420px) {
+      .gauges {
+        flex-direction: column
+      }
+    }
+
+    .gauge {
+      text-align: center
+    }
+
+    .donut {
+      width: 116px;
+      height: 116px;
+      display: block;
+      margin: 0 auto var(--space-3)
+    }
+
+    .donut .g-track {
+      stroke: var(--ink-800)
+    }
+
+    .donut .g-fill {
+      stroke: url(#gaugeGrad);
+      stroke-dasharray: 0 100
+    }
+
+    .snapshot.in .donut .g-fill {
+      animation: donut 1100ms cubic-bezier(.16, 1, .3, 1) 200ms both
+    }
+
+    @keyframes donut {
+      from {
+        stroke-dasharray: 0 100
+      }
+
+      to {
+        stroke-dasharray: 34 100
+      }
+    }
+
+    .donut .g-pct {
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      font-size: 26px;
+      fill: #fff;
+      letter-spacing: var(--tracking-tight)
+    }
+
+    .gauge .g-count {
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-xl);
+      color: #fff;
+      letter-spacing: var(--tracking-tight)
+    }
+
+    .gauge .g-lbl {
+      font: var(--weight-regular) var(--text-sm)/1.3 var(--font-sans);
+      color: var(--ink-400);
+      margin-top: var(--space-1)
+    }
+
+    @keyframes fill {
+      from {
+        transform: scaleX(0)
+      }
+
+      to {
+        transform: scaleX(1)
+      }
+    }
+
+        /* ===== UNIFIED CTA & FOOTER (Celestial Moon Dome & Orbiting Shooting Stars) ===== */
+    .cta-footer {
+      position: relative;
+      background: #06050a;
+      overflow: hidden;
+      padding: 60px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-bloom {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1300px;
+      height: 520px;
+      background: radial-gradient(ellipse 65% 55% at 50% 40%, rgba(145, 73, 255, .45) 0%, rgba(100, 32, 204, .18) 50%, transparent 75%);
+      pointer-events: none;
+    }
+
+    .cta-stars-tex {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 480px;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, .22) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: .25;
+      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 75%);
+      mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 75%);
+    }
+
+    .moon-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--gutter-page);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    /* Comet Orbit Track & Shooting Stars */
+    .comet-track {
+      position: absolute;
+      top: 0;
+      left: var(--gutter-page);
+      right: var(--gutter-page);
+      height: 180px;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .shooting-comet {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+      will-change: transform, left, top, opacity;
+    }
+
+    .comet-1 {
+      animation: orbitCometAcross 13s cubic-bezier(.4, 0, .6, 1) infinite;
+    }
+
+    .comet-2 {
+      animation: orbitCometAcross 13s cubic-bezier(.4, 0, .6, 1) infinite;
+      animation-delay: -6.5s;
+    }
+
+    @keyframes orbitCometAcross {
+      0% {
+        left: 4%;
+        top: 118px;
+        transform: rotate(-44deg) scale(.85);
+        opacity: 0;
+      }
+      10% {
+        opacity: .95;
+      }
+      26% {
+        left: 24%;
+        top: 36px;
+        transform: rotate(-24deg) scale(1);
+        opacity: 1;
+      }
+      50% {
+        left: 50%;
+        top: -6px;
+        transform: rotate(0deg) scale(1.05);
+        opacity: 1;
+      }
+      74% {
+        left: 76%;
+        top: 36px;
+        transform: rotate(24deg) scale(1);
+        opacity: 1;
+      }
+      90% {
+        opacity: .95;
+      }
+      100% {
+        left: 96%;
+        top: 118px;
+        transform: rotate(44deg) scale(.85);
+        opacity: 0;
+      }
+    }
+
+    .comet-tail {
+      width: 60px;
+      height: 3.5px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, transparent 0%, rgba(145, 73, 255, .25) 25%, rgba(192, 132, 252, .85) 75%, #fff 100%);
+      filter: drop-shadow(0 0 8px rgba(168, 85, 247, .95)) drop-shadow(0 0 16px rgba(145, 73, 255, .7));
+    }
+
+    .comet-head {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      margin-left: -3px;
+      box-shadow: 0 0 8px #fff, 0 0 16px #c084fc, 0 0 30px #9149ff;
+    }
+
+    /* Celestial Moon Dome (Naturally fits content without any clipping or cropping) */
+    .moon-dome {
+      position: relative;
+      width: 100%;
+      border-top-left-radius: 50% 180px;
+      border-top-right-radius: 50% 180px;
+      background: radial-gradient(ellipse 85% 70% at 50% 0%, #120e22 0%, #08070d 50%, #050408 100%);
+      border-top: 2px solid rgba(168, 85, 247, .9);
+      border-left: 1px solid rgba(145, 73, 255, .2);
+      border-right: 1px solid rgba(145, 73, 255, .2);
+      box-shadow: 0 -4px 35px rgba(168, 85, 247, .75), 0 -16px 80px rgba(145, 73, 255, .45), 0 -35px 140px rgba(145, 73, 255, .25), inset 0 4px 35px rgba(168, 85, 247, .42), inset 0 16px 70px rgba(145, 73, 255, .2);
+      padding: clamp(64px, 8vw, 96px) clamp(20px, 4vw, 48px) clamp(56px, 6vw, 76px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .moon-eyebrow {
+      color: #c084fc;
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: .05em;
+      text-transform: none;
+      margin-bottom: var(--space-4);
+    }
+
+    .moon-dome h2 {
+      color: #fff;
+      font-size: clamp(26px, 3.4vw, 44px);
+      font-family: var(--font-display);
+      font-weight: var(--weight-semibold);
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      margin: 0 auto var(--space-4);
+      max-width: 17em;
+    }
+
+    .moon-dome p {
+      color: #b3b2c2;
+      font-size: clamp(14px, 1.25vw, 16px);
+      line-height: var(--leading-relaxed);
+      max-width: 32em;
+      margin: 0 auto var(--space-8);
+    }
+
+    /* Button */
+    .btn-moon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      background: #fff;
+      color: #0b0a14;
+      font-family: var(--font-sans);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-base);
+      height: 48px;
+      padding: 0 var(--space-8);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .5), 0 0 25px rgba(255, 255, 255, .25);
+      transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-moon:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: #fff;
+      color: #000;
+      box-shadow: 0 6px 28px rgba(0, 0, 0, .6), 0 0 35px rgba(192, 132, 252, .65);
+      text-decoration: none;
+    }
+
+    .btn-moon:active {
+      transform: scale(.98);
+    }
+
+    .btn-moon .arrow {
+      font-size: 18px;
+      line-height: 1;
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+
+    .btn-moon:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    /* Purple horizon line across bottom */
+    .moon-horizon {
+      position: relative;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(145, 73, 255, .4) 15%, #9149ff 50%, rgba(145, 73, 255, .4) 85%, transparent 100%);
+      box-shadow: 0 0 14px rgba(145, 73, 255, .6), 0 0 28px rgba(145, 73, 255, .35);
+      z-index: 5;
+    }
+
+    /* Footer Content inside cta-footer */
+    .cta-footer .foot-inner {
+      width: 100%;
+      max-width: var(--container-max);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-8) var(--gutter-page);
+      flex-wrap: wrap;
+      z-index: 5;
+    }
+
+    .cta-footer .brandmark {
+      margin-bottom: 0;
+    }
+
+    .cta-footer .links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      font-size: var(--text-base);
+      font-weight: var(--weight-medium);
+    }
+
+    .cta-footer .links a {
+      color: var(--ink-400);
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+
+    .cta-footer .links a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .cta-footer .cr {
+      font-size: var(--text-sm);
+      color: var(--ink-500);
+    }
+
+    /* reveal-on-scroll */
+    .rv {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out)
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: none
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ===== HERO + LEAD FORM ===== -->
-<header class="hero">
-  <div class="hero-bloom" aria-hidden="true"></div>
-  <div class="grid-tex" aria-hidden="true"></div>
-  <div class="wrap hero-inner">
-    <div class="hero-copy">
+  <!-- ===== HERO + LEAD FORM ===== -->
+  <header class="hero">
+    <div class="hero-bloom" aria-hidden="true"></div>
+    <div class="grid-tex" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="brandmark" aria-label="DiGGrowth">
+          <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+            aria-label="DiGGrowth">
+            <path
+              d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z"
+              fill="white" />
+            <path
+              d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z"
+              fill="white" />
+            <path
+              d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z"
+              fill="white" />
+            <path
+              d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z"
+              fill="#9149FF" />
+            <path
+              d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z"
+              fill="#9149FF" />
+            <path
+              d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z"
+              fill="#9149FF" />
+            <path
+              d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z"
+              fill="#9149FF" />
+            <path
+              d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z"
+              fill="#9149FF" />
+            <path
+              d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z"
+              fill="#9149FF" />
+            <path
+              d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707"
+              fill="#9149FF" />
+            <path
+              d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z"
+              fill="white" />
+          </svg>
+        </div>
+
+        <h1>Your Target List Matches Your ICP. Does Your ICP Match <span class="hl">Who Actually Buys?</span></h1>
+        <p class="sub">AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and
+          show which accounts deserve your attention.</p>
+        <p class="lead-in">Find out what your wins and losses say about who to target next.</p>
+      </div>
+
+      <!-- form -->
+      <div class="form-card" id="formCard">
+        <form id="icpForm" novalidate>
+          <h2>Get a Free ICP Analysis</h2>
+          <p class="fine">Two details to start. No credit card.</p>
+          <div class="field" id="f-name">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Jordan Avery" required>
+            <span class="err">Please enter your name.</span>
+          </div>
+          <div class="field" id="f-email">
+            <label for="email">Business Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="jordan@company.com" required>
+            <span class="err">Please enter a valid business email.</span>
+          </div>
+          <button type="submit" class="btn btn-primary">Get a Free ICP Analysis <span class="arrow"
+              aria-hidden="true">→</span></button>
+          <p class="post">We'll contact you to confirm the deal data needed and arrange your free analysis.</p>
+        </form>
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <div class="check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg></div>
+          <h3>Request received</h3>
+          <p>We'll contact you to confirm the deal data needed and arrange your free analysis.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== WHAT YOUR ANALYSIS REVEALS ===== -->
+  <section class="reveal">
+    <div class="grid-tex" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">What You'll Get</span>
+        <h2>What Your Analysis Reveals</h2>
+        <p>Who Has Converted. Who's Worth More. Who to Target Next.</p>
+      </div>
+
+      <div class="reveal-grid">
+        <article class="rcard rv">
+          <div class="well" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" />
+            </svg></div>
+          <h3>Your Customer Profile</h3>
+          <p>See which industries, company sizes, and account traits connect to wins and deal value.</p>
+        </article>
+        <article class="rcard rv">
+          <div class="well" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="4.5" />
+              <circle cx="12" cy="12" r="1" />
+            </svg></div>
+          <h3>Your Target Accounts</h3>
+          <p>See which accounts match your strongest customer patterns and which need a second look.</p>
+        </article>
+        <article class="rcard rv">
+          <div class="well" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18" />
+              <path d="M7 15l3-4 3 2 4-6" />
+            </svg></div>
+          <h3>Your Open Pipeline</h3>
+          <p>See how current opportunities compare with the accounts you've won.</p>
+        </article>
+      </div>
+
+      <!-- snapshot -->
+      <div class="snapshot rv" role="group" aria-label="Illustrative ICP analysis snapshot with fictional data">
+        <div class="snap-top">
+          <div class="title">
+            <span class="well" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M11 7v4l3 2" />
+              </svg></span>
+            <b>Your ICP Analysis at a Glance</b>
+          </div>
+          <span class="fict">Illustrative output · Fictional data</span>
+        </div>
+        <div class="snap-body">
+          <div class="seg-head">Your Strongest Segment</div>
+          <div class="seg-chip">
+            <span class="big">B2B SaaS</span>
+            <span class="pill">200–1,000 employees</span>
+            <span class="pill">Salesforce</span>
+          </div>
+
+          <div class="snap-split">
+            <!-- bar chart: evidence from closed deals -->
+            <div class="evidence">
+              <div class="cap">Evidence From Closed Deals</div>
+              <div class="bars">
+                <!-- Win rate -->
+                <div class="bgroup">
+                  <div class="bgroup-head">
+                    <span class="bic" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18" />
+                        <rect x="7" y="12" width="3" height="6" rx="1" />
+                        <rect x="12" y="8" width="3" height="10" rx="1" />
+                        <rect x="17" y="4" width="3" height="14" rx="1" />
+                      </svg></span>
+                    <span class="bname">Win rate</span>
+                  </div>
+                  <div class="brow"><span class="bseg">This Segment</span>
+                    <div class="btrack"><i class="bfill win" style="--w:60%"></i></div><span
+                      class="bval win dg-num">60%</span>
+                  </div>
+                  <div class="brow"><span class="bseg">Other Accounts</span>
+                    <div class="btrack"><i class="bfill other" style="--w:25%"></i></div><span
+                      class="bval other dg-num">25%</span>
+                  </div>
+                </div>
+                <!-- Average deal value -->
+                <div class="bgroup">
+                  <div class="bgroup-head">
+                    <span class="bic" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg></span>
+                    <span class="bname">Average deal value</span>
+                  </div>
+                  <div class="brow"><span class="bseg">This Segment</span>
+                    <div class="btrack"><i class="bfill win" style="--w:100%"></i></div><span
+                      class="bval win dg-num">$48K</span>
+                  </div>
+                  <div class="brow"><span class="bseg">Other Accounts</span>
+                    <div class="btrack"><i class="bfill other" style="--w:44%"></i></div><span
+                      class="bval other dg-num">$21K</span>
+                  </div>
+                </div>
+                <!-- Average sales cycle -->
+                <div class="bgroup">
+                  <div class="bgroup-head">
+                    <span class="bic" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 7v5l3 2" />
+                      </svg></span>
+                    <span class="bname">Average sales cycle</span>
+                  </div>
+                  <div class="brow"><span class="bseg">This Segment</span>
+                    <div class="btrack"><i class="bfill win" style="--w:54%"></i></div><span class="bval win dg-num">42
+                      days</span>
+                  </div>
+                  <div class="brow"><span class="bseg">Other Accounts</span>
+                    <div class="btrack"><i class="bfill other" style="--w:100%"></i></div><span
+                      class="bval other dg-num">78 days</span>
+                  </div>
+                </div>
+              </div>
+              <div class="legend">
+                <span class="lg"><i class="sw win"></i>This Segment</span>
+                <span class="lg"><i class="sw other"></i>Other Accounts</span>
+              </div>
+            </div>
+
+            <!-- donut gauges: match figures -->
+            <div class="gauges">
+              <div class="gauge">
+                <svg class="donut" viewBox="0 0 120 120" role="img"
+                  aria-label="68 of 200 target accounts match, 34 percent">
+                  <defs>
+                    <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#9149FF" />
+                      <stop offset="1" stop-color="#6420CC" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="g-track" cx="60" cy="60" r="52" fill="none" stroke-width="12" />
+                  <circle class="g-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round"
+                    pathLength="100" stroke-dasharray="0 100" transform="rotate(-90 60 60)" />
+                  <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central"
+                    data-target="34">34%</text>
+                </svg>
+                <div class="g-count dg-num">68 of 200</div>
+                <div class="g-lbl">Target accounts match</div>
+              </div>
+              <div class="gauge">
+                <svg class="donut" viewBox="0 0 120 120" role="img"
+                  aria-label="12 of 35 open opportunities match, 34 percent">
+                  <circle class="g-track" cx="60" cy="60" r="52" fill="none" stroke-width="12" />
+                  <circle class="g-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round"
+                    pathLength="100" stroke-dasharray="0 100" transform="rotate(-90 60 60)" />
+                  <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central"
+                    data-target="34">34%</text>
+                </svg>
+                <div class="g-count dg-num">12 of 35</div>
+                <div class="g-lbl">Open opportunities match</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ===== UNIFIED CLOSING SECTION: MOON DOME CTA + FOOTER ===== -->
+  <footer class="cta-footer" id="ctaSection">
+    <div class="cta-bloom" aria-hidden="true"></div>
+    <div class="cta-stars-tex" aria-hidden="true"></div>
+
+    <div class="moon-stage">
+      <!-- Orbit tracks with two shooting stars moving around the moon dome -->
+      <div class="comet-track" aria-hidden="true">
+        <div class="shooting-comet comet-1">
+          <div class="comet-tail"></div>
+          <div class="comet-head"></div>
+        </div>
+        <div class="shooting-comet comet-2">
+          <div class="comet-tail"></div>
+          <div class="comet-head"></div>
+        </div>
+      </div>
+
+      <!-- Celestial Moon Dome -->
+      <div class="moon-dome">
+        <span class="eyebrow moon-eyebrow">Powered by AI Agents</span>
+        <h2>Stop Spending Your Next Quarter’s Budget on Last Year’s ICP.</h2>
+        <p>Use what you’ve won and what you’ve lost to decide who gets the next dollar. </p>
+        <a href="#formCard" class="btn-moon" id="ctaBtn">Get a Free ICP Analysis<span class="arrow"
+            aria-hidden="true">›</span></a>
+      </div>
+    </div>
+
+    <!-- Glowing Purple Horizon Line -->
+    <div class="moon-horizon" aria-hidden="true"></div>
+
+    <!-- Integrated Footer Row -->
+    <div class="wrap foot-inner">
       <div class="brandmark" aria-label="DiGGrowth">
-        <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DiGGrowth">
-          <path d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z" fill="white"/>
-          <path d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z" fill="white"/>
-          <path d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z" fill="white"/>
-          <path d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z" fill="#9149FF"/>
-          <path d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z" fill="#9149FF"/>
-          <path d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z" fill="#9149FF"/>
-          <path d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z" fill="#9149FF"/>
-          <path d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z" fill="#9149FF"/>
-          <path d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z" fill="#9149FF"/>
-          <path d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707" fill="#9149FF"/>
-          <path d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z" fill="white"/>
+        <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="DiGGrowth">
+          <path
+            d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z"
+            fill="white" />
+          <path
+            d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z"
+            fill="white" />
+          <path
+            d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z"
+            fill="white" />
+          <path
+            d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z"
+            fill="#9149FF" />
+          <path
+            d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z"
+            fill="#9149FF" />
+          <path
+            d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z"
+            fill="#9149FF" />
+          <path
+            d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z"
+            fill="#9149FF" />
+          <path
+            d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z"
+            fill="#9149FF" />
+          <path
+            d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z"
+            fill="#9149FF" />
+          <path
+            d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707"
+            fill="#9149FF" />
+          <path
+            d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z"
+            fill="white" />
         </svg>
       </div>
-
-      <span class="agent-tag">
-        <span class="dot" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M11 7v4l3 2"/></svg></span>
-        <span>ICP Analytics</span>
-      </span>
-
-      <h1>Your Target List Matches Your ICP. Does Your ICP Match <span class="hl">Who Actually Buys?</span></h1>
-      <p class="sub">AI analyzes your closed won and closed lost deals to uncover customer traits linked to wins and show which accounts deserve your attention.</p>
-      <p class="lead-in">Find out what your wins and losses say about who to target next.</p>
+      <div class="links"><a href="https://diggrowth.com/privacy-policy/">Privacy Policy</a></div>
+      <p class="cr">Copyright © 2026. All Rights Reserved</p>
     </div>
+  </footer>
 
-    <!-- form -->
-    <div class="form-card" id="formCard">
-      <form id="icpForm" novalidate>
-        <h2>Get a Free ICP Analysis</h2>
-        <p class="fine">Two details to start. No credit card.</p>
-        <div class="field" id="f-name">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" placeholder="Jordan Avery" required>
-          <span class="err">Please enter your name.</span>
-        </div>
-        <div class="field" id="f-email">
-          <label for="email">Business Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" placeholder="jordan@company.com" required>
-          <span class="err">Please enter a valid business email.</span>
-        </div>
-        <button type="submit" class="btn btn-primary">Get a Free ICP Analysis <span class="arrow" aria-hidden="true">→</span></button>
-        <p class="post">We'll contact you to confirm the deal data needed and arrange your free analysis.</p>
-      </form>
-      <div class="form-success" id="formSuccess" role="status" aria-live="polite">
-        <div class="check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Request received</h3>
-        <p>We'll contact you to confirm the deal data needed and arrange your free analysis.</p>
-      </div>
-    </div>
-  </div>
-</header>
+  <script>
+    (function () {
+      "use strict";
+      var form = document.getElementById('icpForm'),
+        card = document.getElementById('formCard'),
+        success = document.getElementById('formSuccess'),
+        nameF = document.getElementById('f-name'), nameI = document.getElementById('name'),
+        emailF = document.getElementById('f-email'), emailI = document.getElementById('email');
+      var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-<!-- ===== WHAT YOUR ANALYSIS REVEALS ===== -->
-<section class="reveal">
-  <div class="grid-tex" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="eyebrow">What You'll Get</span>
-      <h2>What Your Analysis Reveals</h2>
-      <p>Who Has Converted. Who's Worth More. Who to Target Next.</p>
-    </div>
+      function clearErr(f, i) { f.classList.remove('show-err'); i.classList.remove('invalid'); }
+      nameI.addEventListener('input', function () { clearErr(nameF, nameI); });
+      emailI.addEventListener('input', function () { clearErr(emailF, emailI); });
 
-    <div class="reveal-grid">
-      <article class="rcard rv">
-        <div class="well" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div>
-        <h3>Your Customer Profile</h3>
-        <p>See which industries, company sizes, and account traits connect to wins and deal value.</p>
-      </article>
-      <article class="rcard rv">
-        <div class="well" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></div>
-        <h3>Your Target Accounts</h3>
-        <p>See which accounts match your strongest customer patterns and which need a second look.</p>
-      </article>
-      <article class="rcard rv">
-        <div class="well" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 4-6"/></svg></div>
-        <h3>Your Open Pipeline</h3>
-        <p>See how current opportunities compare with the accounts you've won.</p>
-      </article>
-    </div>
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var ok = true;
+        if (!nameI.value.trim()) { nameF.classList.add('show-err'); nameI.classList.add('invalid'); ok = false; }
+        if (!emailRe.test(emailI.value.trim())) { emailF.classList.add('show-err'); emailI.classList.add('invalid'); ok = false; }
+        if (!ok) { (nameI.classList.contains('invalid') ? nameI : emailI).focus(); return; }
+        card.classList.add('sent');
+        success.classList.add('on');
+        success.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      });
 
-    <!-- snapshot -->
-    <div class="snapshot rv" role="group" aria-label="Illustrative ICP analysis snapshot with fictional data">
-      <div class="snap-top">
-        <div class="title">
-          <span class="well" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M11 7v4l3 2"/></svg></span>
-          <b>Your ICP Analysis at a Glance</b>
-        </div>
-        <span class="fict">Illustrative output · Fictional data</span>
-      </div>
-      <div class="snap-body">
-        <div class="seg-head">Your Strongest Segment</div>
-        <div class="seg-chip">
-          <span class="big">B2B SaaS</span>
-          <span class="pill">200–1,000 employees</span>
-          <span class="pill">Salesforce</span>
-        </div>
+      document.getElementById('ctaBtn').addEventListener('click', function () {
+        setTimeout(function () { if (!card.classList.contains('sent')) nameI.focus(); }, 420);
+      });
 
-        <div class="snap-split">
-          <!-- bar chart: evidence from closed deals -->
-          <div class="evidence">
-            <div class="cap">Evidence From Closed Deals</div>
-            <div class="bars">
-              <!-- Win rate -->
-              <div class="bgroup">
-                <div class="bgroup-head">
-                  <span class="bic" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6" rx="1"/><rect x="12" y="8" width="3" height="10" rx="1"/><rect x="17" y="4" width="3" height="14" rx="1"/></svg></span>
-                  <span class="bname">Win rate</span>
-                </div>
-                <div class="brow"><span class="bseg">This Segment</span><div class="btrack"><i class="bfill win" style="--w:60%"></i></div><span class="bval win dg-num">60%</span></div>
-                <div class="brow"><span class="bseg">Other Accounts</span><div class="btrack"><i class="bfill other" style="--w:25%"></i></div><span class="bval other dg-num">25%</span></div>
-              </div>
-              <!-- Average deal value -->
-              <div class="bgroup">
-                <div class="bgroup-head">
-                  <span class="bic" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-                  <span class="bname">Average deal value</span>
-                </div>
-                <div class="brow"><span class="bseg">This Segment</span><div class="btrack"><i class="bfill win" style="--w:100%"></i></div><span class="bval win dg-num">$48K</span></div>
-                <div class="brow"><span class="bseg">Other Accounts</span><div class="btrack"><i class="bfill other" style="--w:44%"></i></div><span class="bval other dg-num">$21K</span></div>
-              </div>
-              <!-- Average sales cycle -->
-              <div class="bgroup">
-                <div class="bgroup-head">
-                  <span class="bic" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-                  <span class="bname">Average sales cycle</span>
-                </div>
-                <div class="brow"><span class="bseg">This Segment</span><div class="btrack"><i class="bfill win" style="--w:54%"></i></div><span class="bval win dg-num">42 days</span></div>
-                <div class="brow"><span class="bseg">Other Accounts</span><div class="btrack"><i class="bfill other" style="--w:100%"></i></div><span class="bval other dg-num">78 days</span></div>
-              </div>
-            </div>
-            <div class="legend">
-              <span class="lg"><i class="sw win"></i>This Segment</span>
-              <span class="lg"><i class="sw other"></i>Other Accounts</span>
-            </div>
-          </div>
+      // reveal on scroll & trigger chart animations
+      var snapAnimated = false;
+      var pcts = document.querySelectorAll('.donut .g-pct');
+      pcts.forEach(function (el) { el.textContent = '0%'; });
 
-          <!-- donut gauges: match figures -->
-          <div class="gauges">
-            <div class="gauge">
-              <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="68 of 200 target accounts match, 34 percent">
-                <defs><linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9149FF"/><stop offset="1" stop-color="#6420CC"/></linearGradient></defs>
-                <circle class="g-track" cx="60" cy="60" r="52" fill="none" stroke-width="12"/>
-                <circle class="g-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round"
-                        pathLength="100" stroke-dasharray="34 100" transform="rotate(-90 60 60)"/>
-                <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central">34%</text>
-              </svg>
-              <div class="g-count dg-num">68 of 200</div>
-              <div class="g-lbl">Target accounts match</div>
-            </div>
-            <div class="gauge">
-              <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="12 of 35 open opportunities match, 34 percent">
-                <circle class="g-track" cx="60" cy="60" r="52" fill="none" stroke-width="12"/>
-                <circle class="g-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round"
-                        pathLength="100" stroke-dasharray="34 100" transform="rotate(-90 60 60)"/>
-                <text class="g-pct dg-num" x="60" y="60" text-anchor="middle" dominant-baseline="central">34%</text>
-              </svg>
-              <div class="g-count dg-num">12 of 35</div>
-              <div class="g-lbl">Open opportunities match</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      function animateSnapNumbers() {
+        if (snapAnimated) return;
+        snapAnimated = true;
+        pcts.forEach(function (el) {
+          var target = parseInt(el.getAttribute('data-target') || '34', 10);
+          var start = 0, dur = 1100, startTime = null;
+          function step(now) {
+            if (!startTime) startTime = now;
+            var p = Math.min((now - startTime) / dur, 1);
+            var ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(start + (target - start) * ease) + '%';
+            if (p < 1) requestAnimationFrame(step);
+          }
+          setTimeout(function () { requestAnimationFrame(step); }, 200);
+        });
+      }
 
-<!-- ===== CLOSING CTA ===== -->
-<section class="cta">
-  <div class="cta-inner">
-    <span class="eyebrow">ICP Analytics</span>
-    <h2>Stop Spending Your Next Quarter's Budget on Last Year's ICP.</h2>
-    <p>Use what you've won and what you've lost to decide who gets the next dollar.</p>
-    <a href="#formCard" class="btn btn-light btn-lg" id="ctaBtn">Get a Free ICP Analysis <span class="arrow" aria-hidden="true">→</span></a>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="wrap foot-inner">
-    <div class="brandmark" aria-label="DiGGrowth">
-      <svg width="198" height="32" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DiGGrowth">
-        <path d="M48.0581 26.5463C53.3497 26.5463 56.1996 23.5099 56.1996 18.4048C56.1996 13.2998 53.3585 10.1036 48.0581 10.1036H44.4092V26.5374H48.0581V26.5463ZM59.9729 18.4048C59.9729 25.3122 55.2585 29.5472 48.0581 29.5472H40.7246V7.10266H48.0581C55.2585 7.10266 59.9729 11.4619 59.9729 18.4048Z" fill="white"/>
-        <path d="M63.6309 11.5063H67.3065V29.2986H63.6309V11.5063ZM63.1426 6.79192C63.1426 5.46904 64.1725 4.43915 65.4954 4.43915C66.8182 4.43915 67.8215 5.46904 67.8215 6.79192C67.8215 8.11479 66.7916 9.14468 65.4954 9.14468C64.1991 9.14468 63.1426 8.11479 63.1426 6.79192Z" fill="white"/>
-        <path d="M92.8231 12.9535H88.4017C87.2031 10.6895 85.0723 9.56193 82.3999 9.56193C77.9429 9.56193 74.7112 12.7226 74.7112 17.6679C74.7112 22.6131 77.9429 25.8093 82.3999 25.8093C86.4662 25.8093 89.0231 23.3589 89.5736 19.5767H81.148V16.638H93.5156V19.5146C92.8408 24.7084 88.446 29.1387 82.4088 29.1387C76.3715 29.1387 70.9468 24.4243 70.9468 17.6768C70.9468 10.9292 76.0785 6.21478 82.4088 6.21478C87.0877 6.21478 91.1273 8.56755 92.8408 12.9623L92.8231 12.9535Z" fill="white"/>
-        <path d="M117.78 12.9535H113.359C112.16 10.6895 110.029 9.56193 107.357 9.56193C102.9 9.56193 99.6682 12.7226 99.6682 17.6679C99.6682 22.6131 102.9 25.8093 107.357 25.8093C111.423 25.8093 113.98 23.3589 114.531 19.5767H106.105V16.638H118.473V19.5146C117.798 24.7084 113.403 29.1387 107.366 29.1387C101.328 29.1387 95.9038 24.4243 95.9038 17.6768C95.9038 10.9292 101.036 6.21478 107.366 6.21478C112.045 6.21478 116.084 8.56755 117.798 12.9623L117.78 12.9535Z" fill="#9149FF"/>
-        <path d="M125.761 29.627H122.085V11.8348H125.761V14.4184C126.791 12.6427 128.576 11.5418 131.088 11.5418V15.3506H130.147C127.43 15.3506 125.752 16.4782 125.752 20.2604V29.627H125.761Z" fill="#9149FF"/>
-        <path d="M142.196 25.836C144.939 25.836 147.656 23.865 147.656 19.8342C147.656 15.8034 145.037 13.8591 142.293 13.8591C139.55 13.8591 137.028 15.7946 137.028 19.8342C137.028 23.8739 139.417 25.836 142.196 25.836ZM142.196 29.0322C137.126 29.0322 133.282 25.4187 133.282 19.8253C133.282 14.232 137.286 10.654 142.355 10.654C147.425 10.654 151.429 14.2409 151.429 19.8253C151.429 25.4098 147.292 29.0322 142.196 29.0322Z" fill="#9149FF"/>
-        <path d="M152.983 11.5418H156.73L160.441 25.8537L164.223 11.5418H168.067L171.681 25.7827L175.356 11.5418H178.979L173.456 29.3341H169.585L165.999 16.1941L162.412 29.3341H158.541L152.983 11.5418Z" fill="#9149FF"/>
-        <path d="M182.308 14.525H180.213V11.5241H182.308V7.10266H186.019V11.5241H190.352V14.525H186.019V24.3711C186.019 25.694 186.534 26.2444 188.088 26.2444H190.352V29.3163H187.449C184.288 29.3163 182.317 27.9935 182.317 24.38V14.5339L182.308 14.525Z" fill="#9149FF"/>
-        <path d="M193.734 5.32697H197.41V13.4951C198.635 12.0124 200.642 11.1423 202.932 11.1423C206.901 11.1423 210 13.7614 210 18.7333V29.2275H206.351V19.2838C206.351 16.0254 204.575 14.3474 201.894 14.3474C199.212 14.3474 197.401 16.0254 197.401 19.2838V29.2275H193.726V5.32697H193.734Z" fill="#9149FF"/>
-        <path d="M19.6323 16.687L24.6308 9.66418C25.2345 8.82073 26.4065 8.62541 27.2499 9.22914C28.0934 9.83287 28.2887 11.0048 27.685 11.8483V11.8838L21.3636 20.6378C20.7687 21.4813 19.6145 21.6855 18.7711 21.0906C18.6823 21.0285 13.6926 17.85 13.6926 17.85L8.69415 24.2069C8.34789 24.6775 7.79741 24.9705 7.20256 24.9794C6.7764 24.9794 6.368 24.8373 6.0395 24.571C5.22269 23.9317 5.08952 22.742 5.73764 21.9341L12.0946 13.9347C12.716 13.109 13.888 12.9492 14.7048 13.5707" fill="#9149FF"/>
-        <path d="M21.3969 0H12.2255C5.46906 0 0 5.47795 0 12.2255V21.3969C0 28.1533 5.47794 33.6224 12.2255 33.6224H21.3969C28.1533 33.6224 33.6224 28.1444 33.6224 21.3969V12.2255C33.6224 5.46907 28.1444 0 21.3969 0ZM21.3969 1.69577C27.2033 1.69577 31.9355 6.41906 31.9355 12.2344V21.4057C31.9355 27.2122 27.2122 31.9444 21.3969 31.9444H12.2255C6.41905 31.9444 1.68688 27.2211 1.68688 21.4057V12.2344C1.68688 6.42794 6.41017 1.69577 12.2255 1.69577H21.3969Z" fill="white"/>
-      </svg>
-    </div>
-    <div class="links"><a href="https://diggrowth.com/privacy-policy/">Privacy Policy</a></div>
-    <p class="cr">Copyright © 2026. All Rights Reserved</p>
-  </div>
-</footer>
-
-<script>
-(function(){
-  "use strict";
-  var form=document.getElementById('icpForm'),
-      card=document.getElementById('formCard'),
-      success=document.getElementById('formSuccess'),
-      nameF=document.getElementById('f-name'), nameI=document.getElementById('name'),
-      emailF=document.getElementById('f-email'), emailI=document.getElementById('email');
-  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function clearErr(f,i){f.classList.remove('show-err');i.classList.remove('invalid');}
-  nameI.addEventListener('input',function(){clearErr(nameF,nameI);});
-  emailI.addEventListener('input',function(){clearErr(emailF,emailI);});
-
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var ok=true;
-    if(!nameI.value.trim()){nameF.classList.add('show-err');nameI.classList.add('invalid');ok=false;}
-    if(!emailRe.test(emailI.value.trim())){emailF.classList.add('show-err');emailI.classList.add('invalid');ok=false;}
-    if(!ok){ (nameI.classList.contains('invalid')?nameI:emailI).focus(); return; }
-    card.classList.add('sent');
-    success.classList.add('on');
-    success.scrollIntoView({block:'center',behavior:'smooth'});
-  });
-
-  document.getElementById('ctaBtn').addEventListener('click',function(){
-    setTimeout(function(){ if(!card.classList.contains('sent')) nameI.focus(); },420);
-  });
-
-  // reveal on scroll
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
-  },{threshold:.12});
-  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
-})();
-</script>
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add('in');
+            if (en.target.classList.contains('snapshot')) {
+              animateSnapNumbers();
+            }
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: .15 });
+      document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
+
 </html>
