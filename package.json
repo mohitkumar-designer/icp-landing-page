@@ -1,0 +1,11 @@
+{
+  "name": "icp-landing-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ICP Analytics Landing Page for DiGGrowth",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot dev.ts",
+    "start": "bun dev.ts"
+  }
+}

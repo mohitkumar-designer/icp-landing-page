@@ -27,6 +27,9 @@ High-converting, responsive landing page for DiGGrowth's ICP Analytics agent (*"
 Open `index.html` or `icp-landing.html` in any browser, or run a local server:
 
 ```bash
+# Using Bun (Instant with Hot Live-Reload)
+bun run dev
+
 # Using python
 python -m http.server 3000
 
