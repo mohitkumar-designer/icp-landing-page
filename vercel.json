@@ -1,7 +1,6 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/icp-landing", "destination": "/index.html" },
-    { "source": "/icp-landing.html", "destination": "/index.html" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
